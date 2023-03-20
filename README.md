@@ -1,7 +1,9 @@
 # QURI Parts riqu
 
-QURI Parts riqu is a support library for using quantum computers provided by the cloud server
-with riqu (**R**EST **I**nterface for **Qu**antum Computing) interface.
+riqu (**R**EST **I**nterface for **Qu**antum Computing) is an interface for using quantum computers
+through cloud services and was designed by Center for Quantum Information and Quantum Biology, Osaka University (referred to as QIQB).
+
+QURI Parts riqu is a support library for using riqu interface with QURI Parts, developed by QIQB.
 
 This package is experimental and may undergo breaking changes without notice.
 Use it at your own risk.
@@ -48,7 +50,7 @@ If you are interested in contributing to QURI Parts, please take a look at our [
 
 ## Authors
 
-QURI Parts riqu developed and maintained by [Osaka University QIQB.](https://qiqb.osaka-u.ac.jp/). All contributors can be viewed on [GitHub](https://github.com/qiqb-osaka/quri-parts-riqu/graphs/contributors).
+QURI Parts riqu developed and maintained by [QIQB.](https://qiqb.osaka-u.ac.jp/). All contributors can be viewed on [GitHub](https://github.com/qiqb-osaka/quri-parts-riqu/graphs/contributors).
 
 
 ## License
