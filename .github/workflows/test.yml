@@ -24,5 +24,7 @@ jobs:
 
     - run: |
         poetry install -vvv
+        env:
+          POETRY_NO_LOCK: true
 
     - run: poetry run pytest
