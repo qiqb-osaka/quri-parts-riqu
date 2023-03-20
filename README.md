@@ -50,7 +50,7 @@ If you are interested in contributing to QURI Parts, please take a look at our [
 
 ## Authors
 
-QURI Parts riqu developed and maintained by [QIQB.](https://qiqb.osaka-u.ac.jp/). All contributors can be viewed on [GitHub](https://github.com/qiqb-osaka/quri-parts-riqu/graphs/contributors).
+QURI Parts riqu developed and maintained by [QIQB](https://qiqb.osaka-u.ac.jp/). All contributors can be viewed on [GitHub](https://github.com/qiqb-osaka/quri-parts-riqu/graphs/contributors).
 
 
 ## License
