@@ -581,6 +581,9 @@ class ApiClient(object):
         :return: datetime.
         """
         try:
+            # TODO Workaround for date-time returned empty
+            if string == "":
+                return None
             from dateutil.parser import parse
             return parse(string)
         except ImportError:
