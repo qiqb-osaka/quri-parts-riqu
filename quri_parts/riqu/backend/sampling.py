@@ -252,6 +252,7 @@ class RiquSamplingJob(SamplingJob):
         """
         try:
             self._job_api.put_jobs_job_id_cancel(self._job.id)
+            self.refresh()
         except Exception as e:
             raise BackendError("To cancel job is failed.") from e
 

@@ -344,6 +344,9 @@ class TestRiquSamplingJob:
             "quri_parts.riqu.backend.rest.JobApi.put_jobs_job_id_cancel",
             return_value=None,
         )
+        mocker.patch(
+            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job("cancelled")
+        )
         job_raw = get_dummy_job("processing")
         job = RiquSamplingJob(job=job_raw, job_api=JobApi())
 
