@@ -8,63 +8,37 @@ Use it at your own risk.
 
 ## Documentation
 
-[QURI Parts Documentation](https://quri-parts.qunasys.com)
+[QURI Parts Documentation](https://quri-parts.qunasys.com)  
+[QURI Parts riqu Documentation](https://quri-parts-riqu.readthedocs.io)
 
 ## Installation
 
 QURI Parts requires Python 3.9.8 or later.
 
-Use `pip` to install QURI Parts.
-Default installation only contains components not depending specific platforms (devices/simulators) or external libraries.
-You need to specify *extras* with square brackets (`[]`) to use those platforms and external libraries with QURI Parts:
-
-```
-# Default installation, no extras
-pip install quri-parts
-
-# Use Qulacs, a quantum circuit simulator
-pip install "quri-parts[qulacs]"
-
-# Use Amazon Braket SDK
-pip install "quri-parts[braket]"
-
-# Use Qulacs and OpenFermion, a quantum chemistry library for quantum computers
-pip install "quri-parts[qulacs,openfermion]"
-```
-
-Currently available extras are as follows:
-
-- `qulacs`
-- `braket`
-- `qiskit`
-- `cirq`
-- `openfermion`
-- `stim`
-- `openqasm`
-- `riqu`
-
-You can also install individual components (`quri-parts-*`) directly.
-In fact, `quri-parts` is a meta package, a convenience method to install those individual components.
-
-### Installation from local source tree
-
-If you check out the QURI Parts repository and want to install from that local source tree, you can use `requirements-local.txt`.
-In `requirements-local.txt`, optional components are commented out, so please uncomment them as necessary.
+Use `pip` to install QURI Parts riqu.
 
 ```
 pip install quri-parts-riqu
+```
+
+### Installation from local source tree
+
+If you check out the QURI Parts riqu repository and want to install from that local source tree, you can use `requirements-local.txt`.
+In `requirements-local.txt`, optional components are commented out, so please uncomment them as necessary.
+
+```
 pip install -r requirements-local.txt
 ```
 
 
 ## Documentation and tutorials
 
-Documentation of QURI Parts is available at <https://quri-parts.qunasys.com>.
-[Tutorials](https://quri-parts.qunasys.com/tutorials.html) would be a good starting point.
+Documentation of QURI Parts riqu is available at <https://quri-parts-riqu.readthedocs.io>.
+[Tutorials](https://quri-parts-riqu.readthedocs.io/xxx) would be a good starting point.
 
 ## Release notes
 
-See [Releases page](https://github.com/QunaSys/quri-parts/releases) on GitHub.
+See [Releases page](https://github.com/qiqb-osaka/quri-parts-riqu/releases) on GitHub.
 
 
 ## Contribution guidelines
@@ -74,7 +48,7 @@ If you are interested in contributing to QURI Parts, please take a look at our [
 
 ## Authors
 
-QURI Parts developed and maintained by [QunaSys Inc.](https://qunasys.com/en). All contributors can be viewed on [GitHub](https://github.com/QunaSys/quri-parts/graphs/contributors).
+QURI Parts riqu developed and maintained by [Osaka University QIQB.](https://qiqb.osaka-u.ac.jp/). All contributors can be viewed on [GitHub](https://github.com/qiqb-osaka/quri-parts-riqu/graphs/contributors).
 
 
 ## License
