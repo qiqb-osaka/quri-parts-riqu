@@ -8,8 +8,8 @@ Use it at your own risk.
 
 ## Documentation
 
-[QURI Parts Documentation](https://quri-parts.qunasys.com)  
-[QURI Parts riqu Documentation](https://quri-parts-riqu.readthedocs.io)
+ - [QURI Parts Documentation](https://quri-parts.qunasys.com)
+ - [QURI Parts riqu Documentation](https://quri-parts-riqu.readthedocs.io)
 
 ## Installation
 
@@ -34,7 +34,7 @@ pip install -r requirements-local.txt
 ## Documentation and tutorials
 
 Documentation of QURI Parts riqu is available at <https://quri-parts-riqu.readthedocs.io>.
-[Tutorials](https://quri-parts-riqu.readthedocs.io/xxx) would be a good starting point.
+[Tutorials](https://quri-parts-riqu.readthedocs.io/tutorials.html) would be a good starting point.
 
 ## Release notes
 
