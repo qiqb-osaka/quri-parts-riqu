@@ -22,6 +22,10 @@ jobs:
         python-version: '3.9'
         cache: 'poetry'
 
+    - uses: Gr1N/setup-poetry@v8
+      env:
+        POETRY_VERSION: "1.4.2"
+
     - run: |
         poetry install -vvv
 
