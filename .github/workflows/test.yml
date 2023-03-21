@@ -24,7 +24,7 @@ jobs:
 
     - uses: Gr1N/setup-poetry@v8
       env:
-        POETRY_VERSION: "1.4.2"
+        POETRY_VERSION: "1.4.0"
 
     - run: |
         poetry install -vvv
