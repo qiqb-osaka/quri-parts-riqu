@@ -3,3 +3,4 @@
 #sphinx.ext.mathjax
 nbsphinx
 myst_parser
+furo
