@@ -12,6 +12,8 @@ build:
     python: "3.9"
   jobs:
     pre_build:
+      - pwd
+      - ls -l
       - sphinx-apidoc -e -f --implicit-namespaces -o ./quri_parts/riqu -M ../quri_parts
 
 # Build documentation in the docs/ directory with Sphinx
