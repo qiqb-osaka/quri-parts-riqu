@@ -61,7 +61,7 @@ from quri_parts.backend import (
 from quri_parts.circuit import NonParametricQuantumCircuit
 from quri_parts.openqasm.circuit import convert_to_qasm_str
 
-from .rest import ApiClient, Configuration, Job, JobApi, JobsBody
+from ..rest import ApiClient, Configuration, Job, JobApi, JobsBody
 
 JOB_FINAL_STATUS = ["success", "failure", "cancelled"]
 

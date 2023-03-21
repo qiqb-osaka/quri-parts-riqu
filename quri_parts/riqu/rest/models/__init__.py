@@ -14,7 +14,7 @@
 from __future__ import absolute_import
 
 # import models into model package
-from quri_parts.riqu.backend.rest.models.inline_response201 import InlineResponse201
-from quri_parts.riqu.backend.rest.models.inline_response400 import InlineResponse400
-from quri_parts.riqu.backend.rest.models.job import Job
-from quri_parts.riqu.backend.rest.models.jobs_body import JobsBody
+from quri_parts.riqu.rest.models.inline_response201 import InlineResponse201
+from quri_parts.riqu.rest.models.inline_response400 import InlineResponse400
+from quri_parts.riqu.rest.models.job import Job
+from quri_parts.riqu.rest.models.jobs_body import JobsBody

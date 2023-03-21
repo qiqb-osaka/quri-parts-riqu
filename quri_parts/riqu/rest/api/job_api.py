@@ -17,7 +17,7 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from quri_parts.riqu.backend.rest.api_client import ApiClient
+from quri_parts.riqu.rest.api_client import ApiClient
 
 
 class JobApi(object):

@@ -16,8 +16,8 @@ import pytest
 from quri_parts.backend import BackendError
 from quri_parts.circuit import QuantumCircuit
 
-from quri_parts.riqu.backend.rest import Job, JobApi, JobsBody
-from quri_parts.riqu.backend.rest.models import InlineResponse201
+from quri_parts.riqu.rest import Job, JobApi, JobsBody
+from quri_parts.riqu.rest.models import InlineResponse201
 from quri_parts.riqu.backend.sampling import (
     RiquConfig,
     RiquSamplingBackend,
@@ -137,7 +137,7 @@ class TestRiquSamplingJob:
     def test_refresh(self, mocker):
         # Arrange
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job()
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
         )
         job_raw = get_dummy_job("processing")
         job = RiquSamplingJob(job=job_raw, job_api=JobApi())
@@ -151,7 +151,7 @@ class TestRiquSamplingJob:
 
     def test_wait_for_completion(self, mocker):
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("success"),
                 get_dummy_job("failure"),
@@ -201,7 +201,7 @@ class TestRiquSamplingJob:
     def test_wait_for_completion__wait(self, mocker):
         # Arrange
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("processing"),
                 get_dummy_job("success"),
@@ -224,7 +224,7 @@ class TestRiquSamplingJob:
 
     def test_wait_for_completion__timeout(self, mocker):
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("processing"),
                 get_dummy_job("processing"),
@@ -250,7 +250,7 @@ class TestRiquSamplingJob:
 
     def test_result(self, mocker):
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("success"),
                 get_dummy_job("failure"),
@@ -297,7 +297,7 @@ class TestRiquSamplingJob:
     def test_result__wait(self, mocker):
         # Arrange
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("processing"),
                 get_dummy_job("success"),
@@ -319,7 +319,7 @@ class TestRiquSamplingJob:
 
     def test_result__timeout(self, mocker):
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job",
+            "quri_parts.riqu.rest.JobApi.get_job",
             side_effect=[
                 get_dummy_job("processing"),
                 get_dummy_job("processing"),
@@ -341,11 +341,11 @@ class TestRiquSamplingJob:
     def test_cancel(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.put_jobs_job_id_cancel",
+            "quri_parts.riqu.rest.JobApi.put_jobs_job_id_cancel",
             return_value=None,
         )
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job("cancelled")
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job("cancelled")
         )
         job_raw = get_dummy_job("processing")
         job = RiquSamplingJob(job=job_raw, job_api=JobApi())
@@ -413,11 +413,11 @@ class TestRiquSamplingBackend:
     def test_sample(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.post_job",
+            "quri_parts.riqu.rest.JobApi.post_job",
             return_value=InlineResponse201("dummy_id"),
         )
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job()
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
         )
         backend = RiquSamplingBackend(get_dummy_config())
 
@@ -435,11 +435,11 @@ class TestRiquSamplingBackend:
     def test_sample__use_transpiler(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.post_job",
+            "quri_parts.riqu.rest.JobApi.post_job",
             return_value=InlineResponse201("dummy_id"),
         )
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job()
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
         )
         backend = RiquSamplingBackend(get_dummy_config())
 
@@ -457,11 +457,11 @@ class TestRiquSamplingBackend:
     def test_sample__remark(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.post_job",
+            "quri_parts.riqu.rest.JobApi.post_job",
             return_value=InlineResponse201("dummy_id"),
         )
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job()
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
         )
         backend = RiquSamplingBackend(get_dummy_config())
 
@@ -481,7 +481,7 @@ class TestRiquSamplingBackend:
     def test_retrieve_job(self, mocker):
         # Arrange
         mocker.patch(
-            "quri_parts.riqu.backend.rest.JobApi.get_job", return_value=get_dummy_job()
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
         )
         backend = RiquSamplingBackend(get_dummy_config())
 
