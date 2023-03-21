@@ -36,7 +36,7 @@ pip install -r requirements-local.txt
 ## Documentation and tutorials
 
 Documentation of QURI Parts riqu is available at <https://quri-parts-riqu.readthedocs.io>.
-[Tutorials](https://quri-parts-riqu.readthedocs.io/tutorials.html) would be a good starting point.
+[Tutorials](https://quri-parts-riqu.readthedocs.io/en/latest/tutorials.html) would be a good starting point.
 
 ## Release notes
 

@@ -10,6 +10,9 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.9"
+  steps:
+    - name: sphinx.apidoc
+      args: -e -f --implicit-namespaces -o $READTHEDOCS_OUTPUT/html/quri_parts/riqu -M ../quri_parts
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
