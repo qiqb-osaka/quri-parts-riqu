@@ -14,7 +14,7 @@ build:
     pre_build:
       - sphinx-apidoc -e -f --implicit-namespaces -o docs/quri_parts/riqu -M quri_parts/riqu
     post_build:
-      - sphinx -b html docs $READTHEDOCS_OUTPUT/html
+      - python -m sphinx -b html docs $READTHEDOCS_OUTPUT/html
   #commands:
   #  - python -mvirtualenv --system-site-packages $READTHEDOCS_VIRTUALENV_PATH
   #  - python -m pip install --upgrade --no-cache-dir pip setuptools<58.3.0
