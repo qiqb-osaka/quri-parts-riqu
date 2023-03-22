@@ -11,10 +11,12 @@ build:
   tools:
     python: "3.9"
   jobs:
-    pre_build:
-      - sphinx-apidoc -e -f --implicit-namespaces -o docs/quri_parts/riqu -M quri_parts/riqu
+    #pre_build:
+    #  - sphinx-apidoc -e -f --implicit-namespaces -o docs/quri_parts/riqu -M quri_parts/riqu
     post_build:
-      - python -m sphinx -b html docs $READTHEDOCS_OUTPUT/html
+    #  - python -m sphinx -b html docs $READTHEDOCS_OUTPUT/html
+      - ls -lR docs
+      - ls -lR $READTHEDOCS_OUTPUT/html
   #commands:
   #  - python -mvirtualenv --system-site-packages $READTHEDOCS_VIRTUALENV_PATH
   #  - python -m pip install --upgrade --no-cache-dir pip setuptools<58.3.0
