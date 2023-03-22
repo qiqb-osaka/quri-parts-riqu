@@ -43,7 +43,8 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-modindex_common_prefix = ["quri_parts."]
+#modindex_common_prefix = ["quri_parts."]
+html_domain_indices = True
 
 
 # -- Options for HTML output -------------------------------------------------

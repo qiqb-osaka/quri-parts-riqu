@@ -5,7 +5,6 @@ API Reference
 .. * :ref:`modindex`
 
 .. toctree::
-    :maxdepth: 10
+    :maxdepth: 1
 
-    quri_parts
     quri_parts/riqu/quri_parts.riqu
