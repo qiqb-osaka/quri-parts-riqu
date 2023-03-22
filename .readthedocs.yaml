@@ -16,7 +16,10 @@ build:
   #  #post_build:
   #  #  - python -m sphinx-build -b html docs $READTHEDOCS_OUTPUT/html
   commands:
-    - cd docs && python -m pip install --exists-action=w --no-cache-dir -r requirements.txt
+    - python -mvirtualenv --system-site-packages $READTHEDOCS_VIRTUALENV_PATH
+    - python -m pip install --upgrade --no-cache-dir pip setuptools<58.3.0
+    - python -m pip install --upgrade --no-cache-dir -I pillow mock==1.0.1 alabaster>=0.7,<0.8,!=0.7.5 commonmark==0.9.1 recommonmark==0.5.0 sphinx sphinx-rtd-theme readthedocs-sphinx-ext<2.3 setuptools<58.3.0
+    - python -m pip install --exists-action=w --no-cache-dir -r docs/requirements.txt
     - cd docs && sphinx-apidoc -e -f --implicit-namespaces -o ./quri_parts/riqu -M ../quri_parts
     - cd docs && sphinx-build -b html . _build
     - cp --recursive docs/_build/* $READTHEDOCS_OUTPUT/html
