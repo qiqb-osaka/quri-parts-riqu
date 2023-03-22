@@ -11,7 +11,8 @@ build:
   tools:
     python: "3.9"
   jobs:
-    #pre_build:
+    pre_build:
+      - touch quri_parts/__init__.py
     #  - sphinx-apidoc -e -f --implicit-namespaces -o docs/quri_parts/riqu -M quri_parts/riqu
     post_build:
       #- python -m sphinx -b html docs $READTHEDOCS_OUTPUT/html
