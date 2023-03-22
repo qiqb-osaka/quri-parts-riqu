@@ -44,7 +44,6 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 #modindex_common_prefix = ["quri_parts."]
-html_domain_indices = True
 
 
 # -- Options for HTML output -------------------------------------------------
