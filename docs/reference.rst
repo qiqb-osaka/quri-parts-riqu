@@ -3,7 +3,7 @@ API Reference
 
 * :ref:`genindex`
 
-.. * :ref:`modindex`
+* :ref:`modindex`
 
 .. toctree::
     :maxdepth: 1
