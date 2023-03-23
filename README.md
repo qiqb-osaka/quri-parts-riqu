@@ -8,10 +8,6 @@ QURI Parts riqu is a support library for using riqu interface with QURI Parts, d
 This package is experimental and may undergo breaking changes without notice.
 Use it at your own risk.
 
-## Documentation
-
- - [QURI Parts Documentation](https://quri-parts.qunasys.com)
- - [QURI Parts riqu Documentation](https://quri-parts-riqu.readthedocs.io)
 
 ## Installation
 
@@ -34,8 +30,16 @@ poetry install
 
 ## Documentation and tutorials
 
-Documentation of QURI Parts riqu is available at <https://quri-parts-riqu.readthedocs.io>.
-[Tutorials](https://quri-parts-riqu.readthedocs.io/en/latest/tutorials.html) would be a good starting point.
+ - [QURI Parts Documentation](https://quri-parts.qunasys.com)
+ - [QURI Parts riqu Documentation](https://quri-parts-riqu.readthedocs.io)
+ - [QURI Parts riqu Tutorials](https://quri-parts-riqu.readthedocs.io/en/latest/tutorials.html)
+
+
+## Repository
+
+ - [QURI Parts Repository](https://github.com/QunaSys/quri-parts)
+ - [QURI Parts riqu Repository](https://github.com/qiqb-osaka/quri-parts-riqu)
+
 
 ## Release notes
 
