@@ -11,12 +11,13 @@ build:
   tools:
     python: "3.9"
   jobs:
-    pre_build:
-      - touch quri_parts/__init__.py
+    #pre_build:
+    #  - touch quri_parts/__init__.py
     #  - sphinx-apidoc -e -f --implicit-namespaces -o docs/quri_parts/riqu -M quri_parts/riqu
     post_build:
       #- python -m sphinx -b html docs $READTHEDOCS_OUTPUT/html
       #- python -m sphinx -T -E -b html -d _build/doctrees -D language=en . $READTHEDOCS_OUTPUT/html
+      - cp -pr docs_html/quri_parts $READTHEDOCS_OUTPUT/html
       - ls -lR docs
       - ls -lR $READTHEDOCS_OUTPUT/html
   #commands:

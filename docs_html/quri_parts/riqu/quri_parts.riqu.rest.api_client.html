@@ -1,0 +1,506 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="quri_parts.riqu.rest.configuration module" href="quri_parts.riqu.rest.configuration.html" /><link rel="prev" title="quri_parts.riqu.rest.models.jobs_body module" href="quri_parts.riqu.rest.models.jobs_body.html" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+        <title>quri_parts.riqu.rest.api_client module - QURI Parts riqu documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">QURI Parts riqu  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">QURI Parts riqu  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/sampling_on_riqu_server.html">Sampling on riqu server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../reference.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="quri_parts.riqu.html">quri_parts.riqu package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="quri_parts.riqu.backend.html">quri_parts.riqu.backend package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html">quri_parts.riqu.backend.sampling module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="quri_parts.riqu.rest.html">quri_parts.riqu.rest package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.api.html">quri_parts.riqu.rest.api package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.api.job_api.html">quri_parts.riqu.rest.api.job_api module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.models.html">quri_parts.riqu.rest.models package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.inline_response201.html">quri_parts.riqu.rest.models.inline_response201 module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.inline_response400.html">quri_parts.riqu.rest.models.inline_response400 module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.job.html">quri_parts.riqu.rest.models.job module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.jobs_body.html">quri_parts.riqu.rest.models.jobs_body module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">quri_parts.riqu.rest.api_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quri_parts.riqu.rest.configuration.html">quri_parts.riqu.rest.configuration module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quri_parts.riqu.rest.rest.html">quri_parts.riqu.rest.rest module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-quri_parts.riqu.rest.api_client">
+<span id="quri-parts-riqu-rest-api-client-module"></span><h1>quri_parts.riqu.rest.api_client module<a class="headerlink" href="#module-quri_parts.riqu.rest.api_client" title="Permalink to this headline">#</a></h1>
+<p>riqu (Rest Interface for QUantum computing)</p>
+<p>the cloud server with riqu interface.  # noqa: E501</p>
+<p>OpenAPI spec version: 1.0</p>
+<p>Generated by: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen.git">https://github.com/swagger-api/swagger-codegen.git</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.rest.api_client.</span></span><span class="sig-name descname"><span class="pre">ApiClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Generic API client for Swagger client library builds.</p>
+<p>Swagger generic API client. This client handles the client-
+server communication, and is invariant across implementations. Specifics of
+the methods and models for each application are generated from the Swagger
+templates.</p>
+<p>NOTE: This class is auto generated by the swagger code generator program.
+Ref: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen">https://github.com/swagger-api/swagger-codegen</a>
+Do not edit the class manually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configuration</strong> – .Configuration object for this client</p></li>
+<li><p><strong>header_name</strong> – a header to pass when making calls to the API.</p></li>
+<li><p><strong>header_value</strong> – a header value to pass when making calls to
+the API.</p></li>
+<li><p><strong>cookie</strong> – a cookie to include in the header when making calls
+to the API</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.PRIMITIVE_TYPES">
+<span class="sig-name descname"><span class="pre">PRIMITIVE_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'float'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;)</span></em><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.PRIMITIVE_TYPES" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.NATIVE_TYPES_MAPPING">
+<span class="sig-name descname"><span class="pre">NATIVE_TYPES_MAPPING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'bool':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'date':</span> <span class="pre">&lt;class</span> <span class="pre">'datetime.date'&gt;,</span> <span class="pre">'datetime':</span> <span class="pre">&lt;class</span> <span class="pre">'datetime.datetime'&gt;,</span> <span class="pre">'float':</span> <span class="pre">&lt;class</span> <span class="pre">'float'&gt;,</span> <span class="pre">'int':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'long':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'object':</span> <span class="pre">&lt;class</span> <span class="pre">'object'&gt;,</span> <span class="pre">'str':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.NATIVE_TYPES_MAPPING" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.user_agent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_agent</span></span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.user_agent" title="Permalink to this definition">#</a></dt>
+<dd><p>User agent for this API client</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.set_default_header">
+<span class="sig-name descname"><span class="pre">set_default_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.set_default_header" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.sanitize_for_serialization">
+<span class="sig-name descname"><span class="pre">sanitize_for_serialization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.sanitize_for_serialization" title="Permalink to this definition">#</a></dt>
+<dd><p>Builds a JSON POST object.</p>
+<p>If obj is None, return None.
+If obj is str, int, long, float, bool, return directly.
+If obj is datetime.datetime, datetime.date</p>
+<blockquote>
+<div><p>convert to string in iso8601 format.</p>
+</div></blockquote>
+<p>If obj is list, sanitize each element in the list.
+If obj is dict, return the dict.
+If obj is swagger model, return the properties dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obj</strong> – The data to serialize.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The serialized form of data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.deserialize">
+<span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Deserializes response into an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> – RESTResponse object to be deserialized.</p></li>
+<li><p><strong>response_type</strong> – class literal for
+deserialized object, or string of class name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>deserialized object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.call_api">
+<span class="sig-name descname"><span class="pre">call_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_req</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_return_http_data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_formats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_preload_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.call_api" title="Permalink to this definition">#</a></dt>
+<dd><p>Makes the HTTP request (synchronous) and returns deserialized data.</p>
+<p>To make an async request, set the async_req parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_path</strong> – Path to method endpoint.</p></li>
+<li><p><strong>method</strong> – Method to call.</p></li>
+<li><p><strong>path_params</strong> – Path parameters in the url.</p></li>
+<li><p><strong>query_params</strong> – Query parameters in the url.</p></li>
+<li><p><strong>header_params</strong> – Header parameters to be
+placed in the request header.</p></li>
+<li><p><strong>body</strong> – Request body.</p></li>
+<li><p><strong>dict</strong> (<em>files</em>) – Request post form parameters,
+for <cite>application/x-www-form-urlencoded</cite>, <cite>multipart/form-data</cite>.</p></li>
+<li><p><strong>list</strong> (<em>auth_settings</em>) – Auth Settings names for the request.</p></li>
+<li><p><strong>response</strong> – Response data type.</p></li>
+<li><p><strong>dict</strong> – key -&gt; filename, value -&gt; filepath,
+for <cite>multipart/form-data</cite>.</p></li>
+<li><p><strong>bool</strong> (<em>async_req</em>) – execute request asynchronously</p></li>
+<li><p><strong>_return_http_data_only</strong> – response data without head status code
+and headers</p></li>
+<li><p><strong>collection_formats</strong> – dict of collection formats for path, query,
+header, and post parameters.</p></li>
+<li><p><strong>_preload_content</strong> – if False, the urllib3.HTTPResponse object will
+be returned without reading/decoding response
+data. Default is True.</p></li>
+<li><p><strong>_request_timeout</strong> – timeout setting for this request. If one
+number provided, it will be total request
+timeout. It can also be a pair (tuple) of
+(connection, read) timeouts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If async_req parameter is True,
+the request will be called asynchronously.
+The method will return the request thread.
+If parameter async_req is False or missing,
+then the method will return the response directly.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.request">
+<span class="sig-name descname"><span class="pre">request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_preload_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.request" title="Permalink to this definition">#</a></dt>
+<dd><p>Makes the HTTP request using RESTClient.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.parameters_to_tuples">
+<span class="sig-name descname"><span class="pre">parameters_to_tuples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_formats</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.parameters_to_tuples" title="Permalink to this definition">#</a></dt>
+<dd><p>Get parameters as list of tuples, formatting collections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> – Parameters as dict or list of two-tuples</p></li>
+<li><p><strong>collection_formats</strong> (<em>dict</em>) – Parameter collection formats</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Parameters as list of tuples, collections formatted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.prepare_post_parameters">
+<span class="sig-name descname"><span class="pre">prepare_post_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">post_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.prepare_post_parameters" title="Permalink to this definition">#</a></dt>
+<dd><p>Builds form parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>post_params</strong> – Normal form parameters.</p></li>
+<li><p><strong>files</strong> – File parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Form parameters with files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.select_header_accept">
+<span class="sig-name descname"><span class="pre">select_header_accept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accepts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.select_header_accept" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>Accept</cite> based on an array of accepts provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>accepts</strong> – List of headers.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accept (e.g. application/json).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.select_header_content_type">
+<span class="sig-name descname"><span class="pre">select_header_content_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content_types</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.select_header_content_type" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>Content-Type</cite> based on an array of content_types provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>content_types</strong> – List of content-types.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Content-Type (e.g. application/json).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.rest.api_client.ApiClient.update_params_for_auth">
+<span class="sig-name descname"><span class="pre">update_params_for_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">querys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.rest.api_client.ApiClient.update_params_for_auth" title="Permalink to this definition">#</a></dt>
+<dd><p>Updates header and query params based on authentication setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>headers</strong> – Header parameters dict to be updated.</p></li>
+<li><p><strong>querys</strong> – Query parameters tuple list to be updated.</p></li>
+<li><p><strong>auth_settings</strong> – Authentication setting identifiers list.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="quri_parts.riqu.rest.configuration.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">quri_parts.riqu.rest.configuration module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="quri_parts.riqu.rest.models.jobs_body.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">quri_parts.riqu.rest.models.jobs_body module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, QIQB, Osaka University
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>
