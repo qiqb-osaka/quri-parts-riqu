@@ -25,11 +25,10 @@ pip install quri-parts-riqu
 
 ### Installation from local source tree
 
-If you check out the QURI Parts riqu repository and want to install from that local source tree, you can use `requirements-local.txt`.
-In `requirements-local.txt`, optional components are commented out, so please uncomment them as necessary.
+If you check out the QURI Parts riqu repository and want to install from that local source tree, you can use `poetry install` command.
 
 ```
-pip install -r requirements-local.txt
+poetry install
 ```
 
 
