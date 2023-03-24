@@ -5,12 +5,12 @@ build-backend = "poetry_dynamic_versioning.backend"
 [tool.poetry]
 name = "quri-parts-riqu"
 version = "0.0.1"
-description = "A plugin to use riqu(Rest Interface for QUantum computing) with QURI Parts"
+description = "QURI Parts riqu is a support library for using quantum computers provided by the cloud server with riqu (Rest Interface for QUantum computing) interface."
 license = "Apache-2.0"
-authors = ["QURI Parts Authors <opensource@qunasys.com>"]
+authors = ["QIQB, Osaka University"]
 readme = "README.md"
-repository = "https://github.com/QunaSys/quri-parts"
-documentation = "https://quri-parts.qunasys.com"
+repository = "https://github.com/qiqb-osaka/quri-parts-riqu"
+documentation = "https://quri-parts-riqu.readthedocs.io/"
 keywords = ["quantum", "quantum computing"]
 classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
