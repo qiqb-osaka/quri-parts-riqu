@@ -28,6 +28,8 @@ style = "pep440"
 [tool.poetry.dependencies]
 python = ">=3.9.8,<3.12"
 typing-extensions = "^4.1.1"
+certifi = "*"
+six = "*"
 urllib3 = "*"
 quri-parts-openqasm = ">=0.7.1"
 quri-parts-circuit = "*"
