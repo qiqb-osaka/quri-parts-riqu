@@ -53,7 +53,7 @@ def get_dummy_job(status: str = "success") -> Job:
         use_transpiler=True,
         shots=10000,
         status=status,
-        result='{"counts": {"00": 6000, "10": 4000}}',
+        result='{"counts": {"00": 6000, "10": 4000}, "properties": { "0": {"qubit_index": 0, "measurement_window_index": 0}, "1": {"qubit_index": 1, "measurement_window_index": 0}}}',
         created="dummy_created",
         ended="dummy_ended",
         remark="dummy_remark",
@@ -81,9 +81,30 @@ def get_dummy_config() -> RiquConfig:
 class TestRiquSamplingResult:
     def test_init_error(self):
         # case: counts does not exist in result
-        result_dict = dict()
+        result_without_count = {
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0
+                }
+            }
+        }
         with pytest.raises(ValueError):
-            RiquSamplingResult(result_dict)
+            RiquSamplingResult(result_without_count)
+
+        # case: properties does not exist in result
+        result_without_properties = {
+            "counts": {
+                0: 6000,
+                2: 4000,
+            }
+        }
+        with pytest.raises(ValueError):
+            RiquSamplingResult(result_without_properties)
 
     def test_counts(self):
         # Arrange
@@ -91,6 +112,16 @@ class TestRiquSamplingResult:
             "counts": {
                 0: 6000,
                 2: 4000,
+            },
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0
+                }
             }
         }
         result = RiquSamplingResult(result_dict)
@@ -102,6 +133,42 @@ class TestRiquSamplingResult:
         expected = {
             0: 6000,
             2: 4000,
+        }
+        assert actual == expected
+
+    def test_properties(self):
+        # Arrange
+        result_dict = {
+            "counts": {
+                0: 6000,
+                2: 4000,
+            },
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0
+                }
+            }
+        }
+        result = RiquSamplingResult(result_dict)
+
+        # Act
+        actual = result.properties
+
+        # Assert
+        expected = {
+            0: {
+                "qubit_index": 0,
+                "measurement_window_index": 0
+            },
+            1: {
+                "qubit_index": 1,
+                "measurement_window_index": 0
+            }
         }
         assert actual == expected
 
@@ -130,6 +197,7 @@ class TestRiquSamplingJob:
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
+        assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
         assert job.created == "dummy_created"
         assert job.ended == "dummy_ended"
         assert job.remark == "dummy_remark"
@@ -269,6 +337,7 @@ class TestRiquSamplingJob:
 
         # Assert
         assert actual.counts == {0: 6000, 2: 4000}
+        assert actual.properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
 
         # case2: status is "failure"
         # Arrange
@@ -315,6 +384,7 @@ class TestRiquSamplingJob:
 
         # Assert
         assert actual.counts == {0: 6000, 2: 4000}
+        assert actual.properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
         assert elapsed_time >= 3.0
 
     def test_result__timeout(self, mocker):
@@ -497,6 +567,7 @@ class TestRiquSamplingBackend:
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
+        assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
         assert job.created == "dummy_created"
         assert job.ended == "dummy_ended"
         assert job.remark == "dummy_remark"

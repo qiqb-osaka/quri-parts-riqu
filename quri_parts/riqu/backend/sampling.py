@@ -63,6 +63,7 @@ from quri_parts.openqasm.circuit import convert_to_qasm_str
 
 from ..rest import ApiClient, Configuration, Job, JobApi, JobsBody
 
+
 JOB_FINAL_STATUS = ["success", "failure", "cancelled"]
 
 
@@ -75,9 +76,13 @@ class RiquSamplingResult(SamplingResult):
             The value of ``counts`` is the dict input for the counts.
             Where the keys represent a measured classical value
             and the value is an integer the number of shots with that result.
+            
+            If the keys of ``counts`` is expressed as a bit string,
+            then ``properties`` is a mapping from the index of bit string
+            to the index of the quantum circuit.
 
     Raises:
-        ValueError: If ``counts`` does not exist in result.
+        ValueError: If ``counts`` or ``properties`` does not exist in result.
 
     Examples:
         An example of a dict of result is as below:
@@ -87,9 +92,30 @@ class RiquSamplingResult(SamplingResult):
             {
                 "counts": {
                     0: 600,
-                    2: 400,
+                    1: 300,
+                    3: 100,
+                },
+                "properties": {
+                    0: {
+                        "qubit_index": 0,
+                        "measurement_window_index": 0
+                    },
+                    1: {
+                        "qubit_index": 1,
+                        "measurement_window_index": 0
+                    }
                 }
             }
+
+        In the above case, the bit string representation of 0, 1, and 3
+        in the keys of ``counts`` is "00", "01", and "11" respectively.
+        The index of these 2 bits is the key of ``properties``
+        and the index of the quantum circuit is ``qubit_index``.
+        The LSB (Least Significant Bit) of the bit string representation is ``index=0``.
+
+        If the same ``qubit_index`` is measured multiple times in one quantum circuit,
+        ``measurement_window_index`` are set to 0, 1, 2, ...
+        
     """
 
     def __init__(self, result: Dict[str, Any]) -> None:
@@ -97,12 +123,21 @@ class RiquSamplingResult(SamplingResult):
 
         if "counts" not in result:
             raise ValueError("counts does not exist in result.")
-        self._result = result
+        if "properties" not in result:
+            raise ValueError("properties does not exist in result.")
+
+        self._counts = result["counts"]
+        self._properties = result["properties"]
 
     @property
     def counts(self) -> SamplingCounts:
         """Returns the dict input for the counts."""
-        return self._result["counts"]
+        return self._counts
+
+    @property
+    def properties(self) -> Dict:
+        """Returns properties."""
+        return self._properties
 
     def __repr__(self) -> str:
         return str(self._result)
@@ -234,10 +269,15 @@ class RiquSamplingJob(SamplingJob):
             else:
                 self._job = job
 
+        # edit json for RiquSamplingResult
         result = json.loads(self._job.result)
         result["counts"] = Counter(
             {int(bits, 2): count for bits, count in result["counts"].items()}
         )
+        result["properties"] = {
+            int(qubit_index): value for qubit_index, value in result["properties"].items()
+        }
+
         return RiquSamplingResult(result)
 
     def cancel(self) -> None:
