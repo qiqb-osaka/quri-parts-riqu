@@ -475,14 +475,18 @@ then cannot be cancelled and an error occurs.</p>
 <p>A result of a riqu sampling job.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>result</strong> – A result of dict type.
+<dd class="field-odd"><p><strong>result</strong> – <p>A result of dict type.
 This dict should have the key <code class="docutils literal notranslate"><span class="pre">counts</span></code>.
 The value of <code class="docutils literal notranslate"><span class="pre">counts</span></code> is the dict input for the counts.
 Where the keys represent a measured classical value
 and the value is an integer the number of shots with that result.</p>
+<p>If the keys of <code class="docutils literal notranslate"><span class="pre">counts</span></code> is expressed as a bit string,
+then <code class="docutils literal notranslate"><span class="pre">properties</span></code> is a mapping from the index of bit string
+to the index of the quantum circuit.</p>
+</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">counts</span></code> does not exist in result.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">counts</span></code> or <code class="docutils literal notranslate"><span class="pre">properties</span></code> does not exist in result.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -490,15 +494,39 @@ and the value is an integer the number of shots with that result.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="mi">0</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
-        <span class="mi">2</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;qubit_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;qubit_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>In the above case, the bit string representation of 0, 1, and 3
+in the keys of <code class="docutils literal notranslate"><span class="pre">counts</span></code> is “00”, “01”, and “11” respectively.
+The index of these 2 bits is the key of <code class="docutils literal notranslate"><span class="pre">properties</span></code>
+and the index of the quantum circuit is <code class="docutils literal notranslate"><span class="pre">qubit_index</span></code>.
+The LSB (Least Significant Bit) of the bit string representation is <code class="docutils literal notranslate"><span class="pre">index=0</span></code>.</p>
+<p>If the same <code class="docutils literal notranslate"><span class="pre">qubit_index</span></code> is measured multiple times in one quantum circuit,
+<code class="docutils literal notranslate"><span class="pre">measurement_window_index</span></code> are set to 0, 1, 2, …</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.RiquSamplingResult.counts">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">collections.abc.Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#quri_parts.riqu.backend.RiquSamplingResult.counts" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the dict input for the counts.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.RiquSamplingResult.properties">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">properties</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.RiquSamplingResult.properties" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns properties.</p>
 </dd></dl>
 
 </dd></dl>
