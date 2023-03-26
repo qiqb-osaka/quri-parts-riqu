@@ -1,7 +1,7 @@
 # QURI Parts riqu
 
 riqu (**R**EST **I**nterface for **Qu**antum Computing) is an interface for using quantum computers
-through cloud services and was designed by Center for Quantum Information and Quantum Biology, Osaka University (referred to as QIQB).
+through cloud services and designed by Center for Quantum Information and Quantum Biology, Osaka University (referred to as QIQB).
 
 QURI Parts riqu is a support library for using riqu interface with QURI Parts, developed by QIQB.
 
