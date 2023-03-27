@@ -242,6 +242,23 @@ for how to write <code class="docutils literal notranslate"><span class="pre">~/
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>You can also input OpenQASM 3.0 program.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quri_parts.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">quri_parts.riqu.backend</span> <span class="kn">import</span> <span class="n">RiquSamplingBackend</span>
+
+<span class="n">qasm</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;OPENQASM 3;</span>
+<span class="s2">include &quot;stdgates.inc&quot;;</span>
+<span class="s2">qubit[2] q;</span>
+
+<span class="s2">h q[0];</span>
+<span class="s2">cx q[0], q[1];&quot;&quot;&quot;</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">RiquSamplingBackend</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">sample_qasm</span><span class="p">(</span><span class="n">qasm</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">counts</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>To retrieve jobs already sent to riqu server, run the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quri_parts.riqu.backend</span> <span class="kn">import</span> <span class="n">RiquSamplingBackend</span>
 
@@ -338,13 +355,13 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm" title="Permalink to this definition">#</a></dt>
-<dd><p>The circuit converted to QASM format.</p>
+<dd><p>The circuit converted to OpenQASM 3.0 format.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiled_qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm" title="Permalink to this definition">#</a></dt>
-<dd><p>The circuit in QASM format transpiled by riqu server.</p>
+<dd><p>The circuit in OpenQASM 3.0 format transpiled by riqu server.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -516,11 +533,38 @@ If this parameter is None, <code class="docutils literal notranslate"><span clas
 <dd><p>Perform a sampling measurement of a circuit.</p>
 <p>The circuit is transpiled on riqu server.
 The QURI Parts transpiling feature is not supported.
-The circuit is converted to QASM format and sent to riqu server.</p>
+The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> – The circuit to be sampled.</p></li>
+<li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
+<li><p><strong>use_transpiler</strong> – Whether to use transpilers on riqu server.</p></li>
+<li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The job to be executed.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">n_shots</span></code> is not a positive integer.</p></li>
+<li><p><strong>BackendError</strong> – If job is wrong or if an authentication error occurred, etc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm">
+<span class="sig-name descname"><span class="pre">sample_qasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform a sampling measurement of a OpenQASM 3.0 program.</p>
+<p>The OpenQASM 3.0 program is transpiled on riqu server.
+The QURI Parts transpiling feature is not supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qasm</strong> – The OpenQASM 3.0 program to be sampled.</p></li>
 <li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
 <li><p><strong>use_transpiler</strong> – Whether to use transpilers on riqu server.</p></li>
 <li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>

@@ -548,6 +548,62 @@ class TestRiquSamplingBackend:
             body=get_dummy_jobs_body(remark="dummy_remark")
         )
 
+    def test_sample_qasm(self, mocker):
+        # Arrange
+        mock_obj = mocker.patch(
+            "quri_parts.riqu.rest.JobApi.post_job",
+            return_value=InlineResponse201("dummy_id"),
+        )
+        mocker.patch(
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
+        )
+        backend = RiquSamplingBackend(get_dummy_config())
+
+        # Act
+        job = backend.sample_qasm(qasm_data, n_shots=10000)
+
+        # Assert
+        assert job.id == "dummy_id"
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body())
+
+    def test_sample_qasm__use_transpiler(self, mocker):
+        # Arrange
+        mock_obj = mocker.patch(
+            "quri_parts.riqu.rest.JobApi.post_job",
+            return_value=InlineResponse201("dummy_id"),
+        )
+        mocker.patch(
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
+        )
+        backend = RiquSamplingBackend(get_dummy_config())
+
+        # Act
+        job = backend.sample_qasm(qasm_data, n_shots=10000, use_transpiler=False)
+
+        # Assert
+        assert job.id == "dummy_id"
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(use_transpiler=False))
+
+    def test_sample_qasm__remark(self, mocker):
+        # Arrange
+        mock_obj = mocker.patch(
+            "quri_parts.riqu.rest.JobApi.post_job",
+            return_value=InlineResponse201("dummy_id"),
+        )
+        mocker.patch(
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
+        )
+        backend = RiquSamplingBackend(get_dummy_config())
+
+        # Act
+        job = backend.sample_qasm(qasm_data, n_shots=10000, remark="dummy_remark")
+
+        # Assert
+        assert job.id == "dummy_id"
+        mock_obj.assert_called_once_with(
+            body=get_dummy_jobs_body(remark="dummy_remark")
+        )
+
     def test_retrieve_job(self, mocker):
         # Arrange
         mocker.patch(
