@@ -31,6 +31,26 @@ Examples:
         counts = job.result().counts
         print(counts)
 
+    You can also input OpenQASM 3.0 program.
+
+    .. highlight:: python
+    .. code-block:: python
+
+        from quri_parts.circuit import QuantumCircuit
+        from quri_parts.riqu.backend import RiquSamplingBackend
+
+        qasm = \"\"\"OPENQASM 3;
+        include "stdgates.inc";
+        qubit[2] q;
+
+        h q[0];
+        cx q[0], q[1];\"\"\"
+
+        backend = RiquSamplingBackend()
+        job = backend.sample_qasm(qasm, n_shots=1000)
+        counts = job.result().counts
+        print(counts)
+        
     To retrieve jobs already sent to riqu server, run the following code:
 
     .. highlight:: python
@@ -172,12 +192,12 @@ class RiquSamplingJob(SamplingJob):
 
     @property
     def qasm(self) -> str:
-        """The circuit converted to QASM format."""
+        """The circuit converted to OpenQASM 3.0 format."""
         return self._job.qasm
 
     @property
     def transpiled_qasm(self) -> str:
-        """The circuit in QASM format transpiled by riqu server."""
+        """The circuit in OpenQASM 3.0 format transpiled by riqu server."""
         return self._job.transpiled_qasm
 
     @property
@@ -405,7 +425,7 @@ class RiquSamplingBackend(SamplingBackend):
 
         The circuit is transpiled on riqu server.
         The QURI Parts transpiling feature is not supported.
-        The circuit is converted to QASM format and sent to riqu server.
+        The circuit is converted to OpenQASM 3.0 format and sent to riqu server.
 
         Args:
             circuit: The circuit to be sampled.
@@ -420,10 +440,38 @@ class RiquSamplingBackend(SamplingBackend):
             ValueError: If ``n_shots`` is not a positive integer.
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
+        qasm = convert_to_qasm_str(circuit)
+        job = self.sample_qasm(qasm, n_shots, use_transpiler, remark)
+        return job
+
+    def sample_qasm(
+        self,
+        qasm: str,
+        n_shots: int,
+        use_transpiler: bool = True,
+        remark: Optional[str] = None,
+    ) -> SamplingJob:
+        """Perform a sampling measurement of a OpenQASM 3.0 program.
+
+        The OpenQASM 3.0 program is transpiled on riqu server.
+        The QURI Parts transpiling feature is not supported.
+
+        Args:
+            qasm: The OpenQASM 3.0 program to be sampled.
+            n_shots: Number of repetitions of each circuit, for sampling.
+            use_transpiler: Whether to use transpilers on riqu server.
+            remark: The remark to be assigned to the job.
+
+        Returns:
+            The job to be executed.
+
+        Raises:
+            ValueError: If ``n_shots`` is not a positive integer.
+            BackendError: If job is wrong or if an authentication error occurred, etc.
+        """
         if not n_shots >= 1:
             raise ValueError("n_shots should be a positive integer.")
 
-        qasm = convert_to_qasm_str(circuit)
         try:
             body = JobsBody(
                 qasm=qasm, shots=n_shots, use_transpiler=use_transpiler, remark=remark
