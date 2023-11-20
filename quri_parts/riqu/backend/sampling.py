@@ -46,29 +46,18 @@ Examples:
         backend = RiquSamplingBackend()
         transpiler = {
             "optimization_level": 1,
-            "virtual_physical_mapping": {
-                "0": 2, # virtual qubit 0 -> physical qubit 2
-                "1": 3, # virtual qubit 1 -> physical qubit 3
-            },
         }
         job = backend.sample(circuit, n_shots=10000, transpiler=transpiler)
         counts = job.result().counts
         print(counts)
 
-    The specifications of the transpiler settings are as follows:
+    The specifications of the transpiler settings (``dict``) are as follows:
 
     - ``optimization_level``:
-        How much optimization by the transpiler to perform on the circuits. The type is ``int``.
+        How much optimization by the transpiler to perform on the circuits. The type of value is ``int``.
 
         - 0: don't use transpiler
         - 1: use transpiler (by default)
-
-    - ``virtual_physical_mapping``:
-        Specifies mapping from virtual qubits (qubits on program) to physical qubits (qubits on device). The type is ``dict``.
-
-        - If ``virtual_physical_mapping`` is not specified and ``optimization_level=0``, physical qubits are determined by the transpiler.
-        - If ``virtual_physical_mapping`` is not specified and ``optimization_level=1``, physical qubits are indexes in the program.
-        - Even if ``virtual_physical_mapping`` is specified and ``optimization_level=1``, the ``optimization_level`` is used by the transpiler.
 
     You can also input OpenQASM 3.0 program.
 
