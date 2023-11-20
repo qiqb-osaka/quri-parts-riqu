@@ -242,6 +242,49 @@ for how to write <code class="docutils literal notranslate"><span class="pre">~/
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>To perform with the transpiler setting on riqu server, run the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quri_parts.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">quri_parts.riqu.backend</span> <span class="kn">import</span> <span class="n">RiquSamplingBackend</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">add_H_gate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">add_CNOT_gate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">backend</span> <span class="o">=</span> <span class="n">RiquSamplingBackend</span><span class="p">()</span>
+<span class="n">transpiler</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;optimization_level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;virtual_physical_mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1"># virtual qubit 0 -&gt; physical qubit 2</span>
+        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1"># virtual qubit 1 -&gt; physical qubit 3</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">transpiler</span><span class="o">=</span><span class="n">transpiler</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">counts</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The specifications of the transpiler settings are as follows:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">optimization_level</span></code>:</dt><dd><p>How much optimization by the transpiler to perform on the circuits. The type is <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<ul>
+<li><p>0: don’t use transpiler</p></li>
+<li><p>1: use transpiler (by default)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code>:</dt><dd><p>Specifies mapping from virtual qubits (qubits on program) to physical qubits (qubits on device). The type is <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is not specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=0</span></code>, physical qubits are determined by the transpiler.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is not specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=1</span></code>, physical qubits are indexes in the program.</p></li>
+<li><p>Even if <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=1</span></code>, the <code class="docutils literal notranslate"><span class="pre">optimization_level</span></code> is used by the transpiler.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p>You can also input OpenQASM 3.0 program.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quri_parts.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">quri_parts.riqu.backend</span> <span class="kn">import</span> <span class="n">RiquSamplingBackend</span>
@@ -365,9 +408,9 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.use_transpiler">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_transpiler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.use_transpiler" title="Permalink to this definition">#</a></dt>
-<dd><p>Whether to transpile on riqu server.</p>
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler" title="Permalink to this definition">#</a></dt>
+<dd><p>The transpiler setting.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -386,6 +429,18 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.created">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">created</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.created" title="Permalink to this definition">#</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when riqu server received the new job.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue" title="Permalink to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when the job is in queue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">out_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue" title="Permalink to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when the job is out queue.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -529,7 +584,7 @@ If this parameter is None, <code class="docutils literal notranslate"><span clas
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample">
-<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">quri_parts.circuit.circuit.NonParametricQuantumCircuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">quri_parts.circuit.circuit.NonParametricQuantumCircuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'optimization_level':</span> <span class="pre">1}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform a sampling measurement of a circuit.</p>
 <p>The circuit is transpiled on riqu server.
 The QURI Parts transpiling feature is not supported.
@@ -539,7 +594,7 @@ The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> – The circuit to be sampled.</p></li>
 <li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
-<li><p><strong>use_transpiler</strong> – Whether to use transpilers on riqu server.</p></li>
+<li><p><strong>transpiler</strong> – The transpiler setting.</p></li>
 <li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>
 </ul>
 </dd>
@@ -557,7 +612,7 @@ The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm">
-<span class="sig-name descname"><span class="pre">sample_qasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">sample_qasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'optimization_level':</span> <span class="pre">1}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform a sampling measurement of a OpenQASM 3.0 program.</p>
 <p>The OpenQASM 3.0 program is transpiled on riqu server.
 The QURI Parts transpiling feature is not supported.</p>
@@ -566,7 +621,7 @@ The QURI Parts transpiling feature is not supported.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qasm</strong> – The OpenQASM 3.0 program to be sampled.</p></li>
 <li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
-<li><p><strong>use_transpiler</strong> – Whether to use transpilers on riqu server.</p></li>
+<li><p><strong>transpiler</strong> – The transpiler setting.</p></li>
 <li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>
 </ul>
 </dd>
