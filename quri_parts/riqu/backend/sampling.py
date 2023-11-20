@@ -31,6 +31,45 @@ Examples:
         counts = job.result().counts
         print(counts)
 
+    To perform with the transpiler setting on riqu server, run the following code:
+
+    .. highlight:: python
+    .. code-block:: python
+
+        from quri_parts.circuit import QuantumCircuit
+        from quri_parts.riqu.backend import RiquSamplingBackend
+
+        circuit = QuantumCircuit(2)
+        circuit.add_H_gate(0)
+        circuit.add_CNOT_gate(0, 1)
+
+        backend = RiquSamplingBackend()
+        transpiler = {
+            "optimization_level": 1,
+            "virtual_physical_mapping": {
+                "0": 2, # virtual qubit 0 -> physical qubit 2
+                "1": 3, # virtual qubit 1 -> physical qubit 3
+            },
+        }
+        job = backend.sample(circuit, n_shots=10000, transpiler=transpiler)
+        counts = job.result().counts
+        print(counts)
+
+    The specifications of the transpiler settings are as follows:
+
+    - ``optimization_level``:
+        How much optimization by the transpiler to perform on the circuits. The type is ``int``.
+
+        - 0: don't use transpiler
+        - 1: use transpiler (by default)
+
+    - ``virtual_physical_mapping``:
+        Specifies mapping from virtual qubits (qubits on program) to physical qubits (qubits on device). The type is ``dict``.
+
+        - If ``virtual_physical_mapping`` is not specified and ``optimization_level=0``, physical qubits are determined by the transpiler.
+        - If ``virtual_physical_mapping`` is not specified and ``optimization_level=1``, physical qubits are indexes in the program.
+        - Even if ``virtual_physical_mapping`` is specified and ``optimization_level=1``, the ``optimization_level`` is used by the transpiler.
+
     You can also input OpenQASM 3.0 program.
 
     .. highlight:: python
@@ -201,9 +240,10 @@ class RiquSamplingJob(SamplingJob):
         return self._job.transpiled_qasm
 
     @property
-    def use_transpiler(self) -> bool:
-        """Whether to transpile on riqu server."""
-        return self._job.use_transpiler
+    def transpiler(self) -> Dict:
+        """The transpiler setting."""
+        transpiler_dict = json.loads(self._job.transpiler)
+        return transpiler_dict
 
     @property
     def shots(self) -> int:
@@ -219,6 +259,16 @@ class RiquSamplingJob(SamplingJob):
     def created(self) -> datetime.datetime:
         """``datetime`` when riqu server received the new job."""
         return self._job.created
+
+    @property
+    def in_queue(self) -> datetime.datetime:
+        """``datetime`` when the job is in queue."""
+        return self._job.in_queue
+
+    @property
+    def out_queue(self) -> datetime.datetime:
+        """``datetime`` when the job is out queue."""
+        return self._job.out_queue
 
     @property
     def ended(self) -> datetime.datetime:
@@ -409,8 +459,8 @@ class RiquSamplingBackend(SamplingBackend):
         rest_config.host = config.url
         api_client = ApiClient(
             configuration=rest_config,
-            header_name="Authorization",
-            header_value=f"Bearer {config.api_token}",
+            header_name="q-api-token",
+            header_value=config.api_token,
         )
         self._job_api: JobApi = JobApi(api_client=api_client)
 
@@ -418,7 +468,7 @@ class RiquSamplingBackend(SamplingBackend):
         self,
         circuit: NonParametricQuantumCircuit,
         n_shots: int,
-        use_transpiler: bool = True,
+        transpiler: Optional[Dict] = dict(optimization_level=1),
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a circuit.
@@ -430,7 +480,7 @@ class RiquSamplingBackend(SamplingBackend):
         Args:
             circuit: The circuit to be sampled.
             n_shots: Number of repetitions of each circuit, for sampling.
-            use_transpiler: Whether to use transpilers on riqu server.
+            transpiler: The transpiler setting.
             remark: The remark to be assigned to the job.
 
         Returns:
@@ -441,14 +491,14 @@ class RiquSamplingBackend(SamplingBackend):
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
         qasm = convert_to_qasm_str(circuit)
-        job = self.sample_qasm(qasm, n_shots, use_transpiler, remark)
+        job = self.sample_qasm(qasm, n_shots, transpiler, remark)
         return job
 
     def sample_qasm(
         self,
         qasm: str,
         n_shots: int,
-        use_transpiler: bool = True,
+        transpiler: Optional[Dict] = dict(optimization_level=1),
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a OpenQASM 3.0 program.
@@ -459,7 +509,7 @@ class RiquSamplingBackend(SamplingBackend):
         Args:
             qasm: The OpenQASM 3.0 program to be sampled.
             n_shots: Number of repetitions of each circuit, for sampling.
-            use_transpiler: Whether to use transpilers on riqu server.
+            transpiler: The transpiler setting.
             remark: The remark to be assigned to the job.
 
         Returns:
@@ -472,9 +522,10 @@ class RiquSamplingBackend(SamplingBackend):
         if not n_shots >= 1:
             raise ValueError("n_shots should be a positive integer.")
 
+        transpiler_str = json.dumps(transpiler)
         try:
             body = JobsBody(
-                qasm=qasm, shots=n_shots, use_transpiler=use_transpiler, remark=remark
+                qasm=qasm, shots=n_shots, transpiler=transpiler_str, remark=remark
             )
             response_post_job = self._job_api.post_job(body=body)
             response = self._job_api.get_job(response_post_job.job_id)
