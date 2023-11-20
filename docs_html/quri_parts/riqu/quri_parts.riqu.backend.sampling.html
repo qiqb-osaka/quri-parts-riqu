@@ -253,33 +253,19 @@ for how to write <code class="docutils literal notranslate"><span class="pre">~/
 <span class="n">backend</span> <span class="o">=</span> <span class="n">RiquSamplingBackend</span><span class="p">()</span>
 <span class="n">transpiler</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;optimization_level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;virtual_physical_mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1"># virtual qubit 0 -&gt; physical qubit 2</span>
-        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1"># virtual qubit 1 -&gt; physical qubit 3</span>
-    <span class="p">},</span>
 <span class="p">}</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">transpiler</span><span class="o">=</span><span class="n">transpiler</span><span class="p">)</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">counts</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The specifications of the transpiler settings are as follows:</p>
+<p>The specifications of the transpiler settings (<code class="docutils literal notranslate"><span class="pre">dict</span></code>) are as follows:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">optimization_level</span></code>:</dt><dd><p>How much optimization by the transpiler to perform on the circuits. The type is <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">optimization_level</span></code>:</dt><dd><p>How much optimization by the transpiler to perform on the circuits. The type of value is <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 <ul>
 <li><p>0: don’t use transpiler</p></li>
 <li><p>1: use transpiler (by default)</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code>:</dt><dd><p>Specifies mapping from virtual qubits (qubits on program) to physical qubits (qubits on device). The type is <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
-<ul>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is not specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=0</span></code>, physical qubits are determined by the transpiler.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is not specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=1</span></code>, physical qubits are indexes in the program.</p></li>
-<li><p>Even if <code class="docutils literal notranslate"><span class="pre">virtual_physical_mapping</span></code> is specified and <code class="docutils literal notranslate"><span class="pre">optimization_level=1</span></code>, the <code class="docutils literal notranslate"><span class="pre">optimization_level</span></code> is used by the transpiler.</p></li>
 </ul>
 </dd>
 </dl>
