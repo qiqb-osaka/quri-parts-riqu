@@ -144,6 +144,9 @@ class ApiClient(object):
         # request url
         url = self.configuration.host + resource_path
 
+        # TODO: tmori
+        print("header_params:", header_params)
+        
         # perform request and return response
         response_data = self.request(
             method, url, query_params=query_params, headers=header_params,

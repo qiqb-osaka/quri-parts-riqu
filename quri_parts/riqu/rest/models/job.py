@@ -31,7 +31,7 @@ class Job(object):
         'id': 'str',
         'qasm': 'str',
         'transpiled_qasm': 'str',
-        'use_transpiler': 'bool',
+        'transpiler': 'str',
         'shots': 'int',
         'status': 'str',
         'result': 'str',
@@ -44,7 +44,7 @@ class Job(object):
         'id': 'id',
         'qasm': 'qasm',
         'transpiled_qasm': 'transpiled_qasm',
-        'use_transpiler': 'use_transpiler',
+        'transpiler': 'transpiler',
         'shots': 'shots',
         'status': 'status',
         'result': 'result',
@@ -53,12 +53,12 @@ class Job(object):
         'remark': 'remark'
     }
 
-    def __init__(self, id=None, qasm=None, transpiled_qasm=None, use_transpiler=None, shots=None, status=None, result=None, created=None, ended=None, remark=None):  # noqa: E501
+    def __init__(self, id=None, qasm=None, transpiled_qasm=None, transpiler=None, shots=None, status=None, result=None, created=None, ended=None, remark=None):  # noqa: E501
         """Job - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._qasm = None
         self._transpiled_qasm = None
-        self._use_transpiler = None
+        self._transpiler = None
         self._shots = None
         self._status = None
         self._result = None
@@ -72,8 +72,8 @@ class Job(object):
             self.qasm = qasm
         if transpiled_qasm is not None:
             self.transpiled_qasm = transpiled_qasm
-        if use_transpiler is not None:
-            self.use_transpiler = use_transpiler
+        if transpiler is not None:
+            self.transpiler = transpiler
         if shots is not None:
             self.shots = shots
         if status is not None:
@@ -151,25 +151,25 @@ class Job(object):
         self._transpiled_qasm = transpiled_qasm
 
     @property
-    def use_transpiler(self):
-        """Gets the use_transpiler of this Job.  # noqa: E501
+    def transpiler(self):
+        """Gets the transpiler of this Job.  # noqa: E501
 
 
-        :return: The use_transpiler of this Job.  # noqa: E501
+        :return: The transpiler of this Job.  # noqa: E501
         :rtype: bool
         """
-        return self._use_transpiler
+        return self._transpiler
 
-    @use_transpiler.setter
-    def use_transpiler(self, use_transpiler):
-        """Sets the use_transpiler of this Job.
+    @transpiler.setter
+    def transpiler(self, transpiler):
+        """Sets the transpiler of this Job.
 
 
-        :param use_transpiler: The use_transpiler of this Job.  # noqa: E501
+        :param transpiler: The transpiler of this Job.  # noqa: E501
         :type: bool
         """
 
-        self._use_transpiler = use_transpiler
+        self._transpiler = transpiler
 
     @property
     def shots(self):

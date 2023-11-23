@@ -201,9 +201,9 @@ class RiquSamplingJob(SamplingJob):
         return self._job.transpiled_qasm
 
     @property
-    def use_transpiler(self) -> bool:
+    def transpiler(self) -> str:
         """Whether to transpile on riqu server."""
-        return self._job.use_transpiler
+        return self._job.transpiler
 
     @property
     def shots(self) -> int:
@@ -409,8 +409,10 @@ class RiquSamplingBackend(SamplingBackend):
         rest_config.host = config.url
         api_client = ApiClient(
             configuration=rest_config,
-            header_name="Authorization",
-            header_value=f"Bearer {config.api_token}",
+            # header_name="Authorization",
+            # header_value=f"Bearer {config.api_token}",
+            header_name="q-api-token",
+            header_value=config.api_token,
         )
         self._job_api: JobApi = JobApi(api_client=api_client)
 
@@ -418,7 +420,7 @@ class RiquSamplingBackend(SamplingBackend):
         self,
         circuit: NonParametricQuantumCircuit,
         n_shots: int,
-        use_transpiler: bool = True,
+        transpiler: str = True,
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a circuit.
@@ -430,7 +432,7 @@ class RiquSamplingBackend(SamplingBackend):
         Args:
             circuit: The circuit to be sampled.
             n_shots: Number of repetitions of each circuit, for sampling.
-            use_transpiler: Whether to use transpilers on riqu server.
+            transpiler: Whether to use transpilers on riqu server.
             remark: The remark to be assigned to the job.
 
         Returns:
@@ -441,14 +443,14 @@ class RiquSamplingBackend(SamplingBackend):
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
         qasm = convert_to_qasm_str(circuit)
-        job = self.sample_qasm(qasm, n_shots, use_transpiler, remark)
+        job = self.sample_qasm(qasm, n_shots, transpiler, remark)
         return job
 
     def sample_qasm(
         self,
         qasm: str,
         n_shots: int,
-        use_transpiler: bool = True,
+        transpiler: str = True,
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a OpenQASM 3.0 program.
@@ -459,7 +461,7 @@ class RiquSamplingBackend(SamplingBackend):
         Args:
             qasm: The OpenQASM 3.0 program to be sampled.
             n_shots: Number of repetitions of each circuit, for sampling.
-            use_transpiler: Whether to use transpilers on riqu server.
+            transpiler: Whether to use transpilers on riqu server.
             remark: The remark to be assigned to the job.
 
         Returns:
@@ -474,7 +476,7 @@ class RiquSamplingBackend(SamplingBackend):
 
         try:
             body = JobsBody(
-                qasm=qasm, shots=n_shots, use_transpiler=use_transpiler, remark=remark
+                qasm=qasm, shots=n_shots, transpiler=transpiler, remark=remark
             )
             response_post_job = self._job_api.post_job(body=body)
             response = self._job_api.get_job(response_post_job.job_id)
