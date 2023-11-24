@@ -51,7 +51,7 @@ def get_dummy_job(status: str = "success") -> Job:
         id="dummy_id",
         qasm="dummy_qasm",
         transpiled_qasm="dummy_transpiled_qasm",
-        transpiler='{"optimization_level": 1}',
+        transpiler="normal",
         shots=10000,
         status=status,
         result='{"counts": {"00": 6000, "10": 4000}, "properties": { "0": {"qubit_index": 0, "measurement_window_index": 0}, "1": {"qubit_index": 1, "measurement_window_index": 0}}}',
@@ -65,13 +65,12 @@ def get_dummy_job(status: str = "success") -> Job:
 
 
 def get_dummy_jobs_body(
-    transpiler: Optional[Dict] = {"optimization_level": 1},
+    transpiler: Optional[str] = "normal",
     remark: Optional[str] = None,
 ) -> JobsBody:
-    transpiler_str = json.dumps(transpiler)
     jobs_body = JobsBody(
         qasm=qasm_data,
-        transpiler=transpiler_str,
+        transpiler=transpiler,
         shots=10000,
         remark=remark,
     )
@@ -198,7 +197,7 @@ class TestRiquSamplingJob:
         assert job.id == "dummy_id"
         assert job.qasm == "dummy_qasm"
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
-        assert job.transpiler == {"optimization_level": 1}
+        assert job.transpiler == "normal"
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
@@ -525,11 +524,11 @@ class TestRiquSamplingBackend:
         circuit.add_CNOT_gate(0, 1)
 
         # Act
-        job = backend.sample(circuit, n_shots=10000, transpiler={"optimization_level": 1})
+        job = backend.sample(circuit, n_shots=10000, transpiler="normal")
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler={"optimization_level": 1}))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal"))
 
     def test_sample__remark(self, mocker):
         # Arrange
@@ -585,11 +584,11 @@ class TestRiquSamplingBackend:
         backend = RiquSamplingBackend(get_dummy_config())
 
         # Act
-        job = backend.sample_qasm(qasm_data, n_shots=10000, transpiler={"optimization_level": 1})
+        job = backend.sample_qasm(qasm_data, n_shots=10000, transpiler="normal")
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler={"optimization_level": 1}))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal"))
 
     def test_sample_qasm__remark(self, mocker):
         # Arrange
@@ -626,7 +625,7 @@ class TestRiquSamplingBackend:
         assert job.id == "dummy_id"
         assert job.qasm == "dummy_qasm"
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
-        assert job.transpiler == {"optimization_level": 1}
+        assert job.transpiler == "normal"
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}

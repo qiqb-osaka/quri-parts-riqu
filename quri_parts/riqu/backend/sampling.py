@@ -44,20 +44,15 @@ Examples:
         circuit.add_CNOT_gate(0, 1)
 
         backend = RiquSamplingBackend()
-        transpiler = {
-            "optimization_level": 1,
-        }
-        job = backend.sample(circuit, n_shots=10000, transpiler=transpiler)
+        job = backend.sample(circuit, n_shots=10000, transpiler="normal")
         counts = job.result().counts
         print(counts)
 
-    The specifications of the transpiler settings (``dict``) are as follows:
+    The specifications of the transpiler setting is as follows:
 
-    - ``optimization_level``:
-        How much optimization by the transpiler to perform on the circuits. The type of value is ``int``.
-
-        - 0: don't use transpiler
-        - 1: use transpiler (by default)
+    - ``"none"``: no transpiler
+    - ``"pass"``: use the "do nothing transpiler" (same as ``"none"``)
+    - ``"normal"``: use default transpiler (by default)
 
     You can also input OpenQASM 3.0 program.
 
@@ -229,10 +224,9 @@ class RiquSamplingJob(SamplingJob):
         return self._job.transpiled_qasm
 
     @property
-    def transpiler(self) -> Dict:
+    def transpiler(self) -> str:
         """The transpiler setting."""
-        transpiler_dict = json.loads(self._job.transpiler)
-        return transpiler_dict
+        return self._job.transpiler
 
     @property
     def shots(self) -> int:
@@ -457,7 +451,7 @@ class RiquSamplingBackend(SamplingBackend):
         self,
         circuit: NonParametricQuantumCircuit,
         n_shots: int,
-        transpiler: Optional[Dict] = dict(optimization_level=1),
+        transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a circuit.
@@ -487,7 +481,7 @@ class RiquSamplingBackend(SamplingBackend):
         self,
         qasm: str,
         n_shots: int,
-        transpiler: Optional[Dict] = dict(optimization_level=1),
+        transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a OpenQASM 3.0 program.
@@ -511,10 +505,9 @@ class RiquSamplingBackend(SamplingBackend):
         if not n_shots >= 1:
             raise ValueError("n_shots should be a positive integer.")
 
-        transpiler_str = json.dumps(transpiler)
         try:
             body = JobsBody(
-                qasm=qasm, shots=n_shots, transpiler=transpiler_str, remark=remark
+                qasm=qasm, shots=n_shots, transpiler=transpiler, remark=remark
             )
             response_post_job = self._job_api.post_job(body=body)
             response = self._job_api.get_job(response_post_job.job_id)
