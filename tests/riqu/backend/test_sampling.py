@@ -8,8 +8,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import time
-from typing import Optional
+from typing import Dict, Optional
 from unittest.mock import mock_open
 
 import pytest
@@ -50,11 +51,13 @@ def get_dummy_job(status: str = "success") -> Job:
         id="dummy_id",
         qasm="dummy_qasm",
         transpiled_qasm="dummy_transpiled_qasm",
-        use_transpiler=True,
+        transpiler="normal",
         shots=10000,
         status=status,
         result='{"counts": {"00": 6000, "10": 4000}, "properties": { "0": {"qubit_index": 0, "measurement_window_index": 0}, "1": {"qubit_index": 1, "measurement_window_index": 0}}}',
         created="dummy_created",
+        in_queue="dummy_in_queue",
+        out_queue="dummy_out_queue",
         ended="dummy_ended",
         remark="dummy_remark",
     )
@@ -62,11 +65,12 @@ def get_dummy_job(status: str = "success") -> Job:
 
 
 def get_dummy_jobs_body(
-    use_transpiler: bool = True, remark: Optional[str] = None
+    transpiler: Optional[str] = "normal",
+    remark: Optional[str] = None,
 ) -> JobsBody:
     jobs_body = JobsBody(
         qasm=qasm_data,
-        use_transpiler=use_transpiler,
+        transpiler=transpiler,
         shots=10000,
         remark=remark,
     )
@@ -193,12 +197,14 @@ class TestRiquSamplingJob:
         assert job.id == "dummy_id"
         assert job.qasm == "dummy_qasm"
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
-        assert job.use_transpiler is True
+        assert job.transpiler == "normal"
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
         assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
         assert job.created == "dummy_created"
+        assert job.in_queue == "dummy_in_queue"
+        assert job.out_queue == "dummy_out_queue"
         assert job.ended == "dummy_ended"
         assert job.remark == "dummy_remark"
 
@@ -502,7 +508,7 @@ class TestRiquSamplingBackend:
         assert job.id == "dummy_id"
         mock_obj.assert_called_once_with(body=get_dummy_jobs_body())
 
-    def test_sample__use_transpiler(self, mocker):
+    def test_sample__transpiler(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
             "quri_parts.riqu.rest.JobApi.post_job",
@@ -518,11 +524,11 @@ class TestRiquSamplingBackend:
         circuit.add_CNOT_gate(0, 1)
 
         # Act
-        job = backend.sample(circuit, n_shots=10000, use_transpiler=False)
+        job = backend.sample(circuit, n_shots=10000, transpiler="normal")
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(use_transpiler=False))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal"))
 
     def test_sample__remark(self, mocker):
         # Arrange
@@ -566,7 +572,7 @@ class TestRiquSamplingBackend:
         assert job.id == "dummy_id"
         mock_obj.assert_called_once_with(body=get_dummy_jobs_body())
 
-    def test_sample_qasm__use_transpiler(self, mocker):
+    def test_sample_qasm__transpiler(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
             "quri_parts.riqu.rest.JobApi.post_job",
@@ -578,11 +584,11 @@ class TestRiquSamplingBackend:
         backend = RiquSamplingBackend(get_dummy_config())
 
         # Act
-        job = backend.sample_qasm(qasm_data, n_shots=10000, use_transpiler=False)
+        job = backend.sample_qasm(qasm_data, n_shots=10000, transpiler="normal")
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(use_transpiler=False))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal"))
 
     def test_sample_qasm__remark(self, mocker):
         # Arrange
@@ -619,11 +625,13 @@ class TestRiquSamplingBackend:
         assert job.id == "dummy_id"
         assert job.qasm == "dummy_qasm"
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
-        assert job.use_transpiler is True
+        assert job.transpiler == "normal"
         assert job.shots == 10000
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
         assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
         assert job.created == "dummy_created"
+        assert job.in_queue == "dummy_in_queue"
+        assert job.out_queue == "dummy_out_queue"
         assert job.ended == "dummy_ended"
         assert job.remark == "dummy_remark"
