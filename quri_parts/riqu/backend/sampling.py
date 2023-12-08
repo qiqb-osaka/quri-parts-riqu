@@ -384,7 +384,7 @@ class RiquConfig:
         return self._api_token
 
     @staticmethod
-    def from_file(section: str = "default", path: str = "~/.riqu") -> Dict[str, str]:
+    def from_file(section: str = "default", path: str = "~/.riqu") -> "RiquConfig":
         """Reads configuration information from a file.
 
         Args:
@@ -392,11 +392,11 @@ class RiquConfig:
             path: A path for config file.
 
         Returns:
-            Configuration information in dict .
+            Configuration information :class:`RiquConfig` .
 
         Examples:
             The riqu configuration file describes configuration information for each
-            section. A section has a header in the form ``[section_name]``.
+            section. A section has a header in the form ``[section]``.
             The default file path is ``~/.riqu`` and the default section name is
             ``default``. Each section describes a setting in the format ``key=value``.
             An example of a configuration file description is as below:
@@ -411,11 +411,11 @@ class RiquConfig:
         path = os.path.expanduser(path)
         parser = configparser.ConfigParser()
         parser.read(path, encoding="utf-8")
-        config_dict = {
-            "url": parser[section]["url"],
-            "api_token": parser[section]["api_token"],
-        }
-        return config_dict
+        config = RiquConfig(
+            url=parser[section]["url"],
+            api_token=parser[section]["api_token"],
+        )
+        return config
 
 
 class RiquSamplingBackend(SamplingBackend):

@@ -448,8 +448,8 @@ class TestRiquConfig:
         actual = RiquConfig.from_file()
 
         # Assert
-        assert actual["url"] == "default_url"
-        assert actual["api_token"] == "default_api_token"
+        assert actual.url == "default_url"
+        assert actual.api_token == "default_api_token"
 
     def test_from_file__section(self, mocker):
         # Arrange
@@ -459,8 +459,8 @@ class TestRiquConfig:
         actual = RiquConfig.from_file(section="test")
 
         # Assert
-        assert actual["url"] == "test_url"
-        assert actual["api_token"] == "test_api_token"
+        assert actual.url == "test_url"
+        assert actual.api_token == "test_api_token"
 
     def test_from_file__wrong(self, mocker):
         # Arrange
