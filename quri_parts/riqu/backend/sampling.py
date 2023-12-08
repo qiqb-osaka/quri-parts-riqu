@@ -434,8 +434,7 @@ class RiquSamplingBackend(SamplingBackend):
 
         # if config is None, load them from file
         if config is None:
-            config_dict = RiquConfig.from_file()
-            config = RiquConfig(**config_dict)
+            config = RiquConfig.from_file()
 
         # construct JobApi
         rest_config = Configuration()
