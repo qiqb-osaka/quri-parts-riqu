@@ -406,6 +406,21 @@ class RiquConfig:
                 [default]
                 url=<base URL>
                 api_token=<API token>
+
+                [sectionA]
+                url=<base URL>
+                api_token=<API token>
+
+                [sectioB]
+                url=<base URL>
+                api_token=<API token>
+
+            If ``sectionA`` settings are to be used, initialize ``RiquSamplingBackend`` as follows
+
+            .. code-block::
+
+                backend = RiquSamplingBackend(RiquConfig.from_file("sectionA"))
+
         """
         path = os.path.expandvars(path)
         path = os.path.expanduser(path)
