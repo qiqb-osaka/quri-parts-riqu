@@ -273,6 +273,18 @@ An example of a configuration file description is as below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">default</span><span class="p">]</span>
 <span class="n">url</span><span class="o">=&lt;</span><span class="n">base</span> <span class="n">URL</span><span class="o">&gt;</span>
 <span class="n">api_token</span><span class="o">=&lt;</span><span class="n">API</span> <span class="n">token</span><span class="o">&gt;</span>
+
+<span class="p">[</span><span class="n">sectionA</span><span class="p">]</span>
+<span class="n">url</span><span class="o">=&lt;</span><span class="n">base</span> <span class="n">URL</span><span class="o">&gt;</span>
+<span class="n">api_token</span><span class="o">=&lt;</span><span class="n">API</span> <span class="n">token</span><span class="o">&gt;</span>
+
+<span class="p">[</span><span class="n">sectioB</span><span class="p">]</span>
+<span class="n">url</span><span class="o">=&lt;</span><span class="n">base</span> <span class="n">URL</span><span class="o">&gt;</span>
+<span class="n">api_token</span><span class="o">=&lt;</span><span class="n">API</span> <span class="n">token</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">sectionA</span></code> settings are to be used, initialize <code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend</span></code> as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">RiquSamplingBackend</span><span class="p">(</span><span class="n">RiquConfig</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;sectionA&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </dd></dl>
