@@ -59,3 +59,8 @@ QURI Parts riqu developed and maintained by [QIQB](https://qiqb.osaka-u.ac.jp/).
 ## License
 
 Apache License 2.0
+
+
+## Support
+
+QURI Parts riqu development is supported by JST COI-NEXT GrantNumber JPMJPF2014.
