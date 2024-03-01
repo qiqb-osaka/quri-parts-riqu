@@ -24,3 +24,4 @@ from quri_parts.riqu.rest.models.inline_response201 import InlineResponse201
 from quri_parts.riqu.rest.models.inline_response400 import InlineResponse400
 from quri_parts.riqu.rest.models.job import Job
 from quri_parts.riqu.rest.models.jobs_body import JobsBody
+from quri_parts.riqu.rest.models.ssejobs_body import SsejobsBody
