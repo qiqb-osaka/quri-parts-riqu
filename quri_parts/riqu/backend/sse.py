@@ -11,18 +11,14 @@
 """
 import os
 import base64
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from quri_parts.backend import (
-    BackendError,
-    SamplingBackend,
-    SamplingCounts,
-    SamplingJob,
-    SamplingResult,
+    BackendError
 )
 
-from sampling import RiquSamplingBackend, RiquConfig, RiquSamplingJob
-from quri_parts.riqu.rest import ApiClient, Configuration, Job, JobApi
+from .sampling import RiquSamplingBackend, RiquConfig, RiquSamplingJob
+from ..rest import ApiClient, Configuration, JobApi
 
 class RiquSSEJob:
  
@@ -52,11 +48,11 @@ class RiquSSEJob:
         file_path: str
     ) -> RiquSamplingJob:
         # if file_path is not set, raise ValueError
-        if file_path == None:
+        if file_path is None:
             raise ValueError("file_path is not set.")
 
         # if the file does not exist, raise ValueError
-        if os.path.exists(file_path) == False:
+        if not os.path.exists(file_path):
             raise ValueError(f'The file does not exist: {file_path}')
 
         # get the base name and the extension of the file
@@ -93,11 +89,11 @@ class RiquSSEJob:
         ) -> str:
 
         # if job_id is not set, raise ValueError
-        if job_id == None:
-            if self.job == None:
-                raise ValueError("job_id is not set.")
-            else:
+        if job_id is None:
+            if self.job is not None:
                 job_id = self.job.id()
+            else:
+                raise ValueError("job_id is not set.")
 
         try:
             response = self._job_api.download_file(job_id=job_id)
@@ -107,13 +103,13 @@ class RiquSSEJob:
         data = response["file"]
         filename = response["filename"]
         
-        if download_path == None:
+        if download_path is None:
             download_path = os.getcwd()
 
         file_path = os.path.join(download_path, filename)
         
         # if the file already exists, raise ValueError
-        if os.path.exists(file_path) == True:
+        if os.path.exists(file_path):
             raise ValueError(f"The file already exists: {file_path}")
 
         # decode the base64 encoded data and write it to the file
