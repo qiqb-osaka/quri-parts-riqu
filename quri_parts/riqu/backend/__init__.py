@@ -15,9 +15,14 @@ from .sampling import (
     RiquSamplingResult,
 )
 
+from .sse import (
+    RiquSSEJob,
+)
+
 __all__ = [
     "RiquConfig",
     "RiquSamplingBackend",
     "RiquSamplingJob",
     "RiquSamplingResult",
+    "RiquSSEJob",
 ]
