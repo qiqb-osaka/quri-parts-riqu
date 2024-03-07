@@ -42,7 +42,7 @@ class RiquSSEJob:
         )
         self._job_api: JobApi = JobApi(api_client=api_client)
         self.job = None
-    
+
     def run_sse(
         self,
         file_path: str
@@ -61,7 +61,7 @@ class RiquSSEJob:
         # if the extension is not .py, raise ValueError
         if ext != ".py":
             raise ValueError(f"The file is not python file: {file_path}")
-        
+
         job_type = 'sse'
         max_file_size = 10 * 1024 * 1024 # 10MB
 
@@ -70,15 +70,15 @@ class RiquSSEJob:
             raise ValueError(f"file size is larger than {max_file_size}")
 
         try:
-            response = self._job_api.post_upload(up_file=file_path, job_type=job_type)
+            response = self._job_api.post_ssejob(up_file=file_path, job_type=job_type)
+
+            job_id = response["job_id"]
+
+            # make an instance of RiquSamplingBackend
+            riqu_sampling_backend = RiquSamplingBackend(config=self.config)
+            self.job = riqu_sampling_backend.retrieve_job(job_id=job_id)
         except Exception as e:
             raise BackendError("To perform sse on riqu server is failed.") from e
-
-        job_id = response["job_id"]
-
-        # make an instance of RiquSamplingBackend
-        riqu_sampling_backend = RiquSamplingBackend(config=self.config)
-        self.job = riqu_sampling_backend.retrieve_job(job_id=job_id)
 
         return self.job
     
@@ -99,15 +99,22 @@ class RiquSSEJob:
             response = self._job_api.download_file(job_id=job_id)
         except Exception as e:
             raise BackendError("To perform sse on riqu server is failed.") from e
-        
+
+        if response is None or not "file" in response or not "filename" in response \
+            or not response["file"] or not response["filename"]:
+                raise BackendError("To perform sse on riqu server is failed. The response does not contain valid file data.")
+
         data = response["file"]
         filename = response["filename"]
-        
+
         if download_path is None:
             download_path = os.getcwd()
+        else:
+            if not os.path.exists(download_path):
+                raise ValueError(f"The destination path does not exist: {download_path}")
 
         file_path = os.path.join(download_path, filename)
-        
+
         # if the file already exists, raise ValueError
         if os.path.exists(file_path):
             raise ValueError(f"The file already exists: {file_path}")
