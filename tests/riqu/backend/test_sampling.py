@@ -34,6 +34,11 @@ api_token=default_api_token
 url=test_url
 api_token=test_api_token
 
+[option]
+url=test_url
+api_token=test_api_token
+proxy=http://testproxy:port
+
 [wrong]
 url=test_url
 """
@@ -450,6 +455,7 @@ class TestRiquConfig:
         # Assert
         assert actual.url == "default_url"
         assert actual.api_token == "default_api_token"
+        assert actual.proxy is None
 
     def test_from_file__section(self, mocker):
         # Arrange
@@ -461,6 +467,19 @@ class TestRiquConfig:
         # Assert
         assert actual.url == "test_url"
         assert actual.api_token == "test_api_token"
+        assert actual.proxy is None
+
+    def test_from_file__optional(self, mocker):
+        # Arrange
+        mocker.patch("builtins.open", mock_open(read_data=config_file_data))
+
+        # Act
+        actual = RiquConfig.from_file(section="option")
+
+        # Assert
+        assert actual.url == "test_url"
+        assert actual.api_token == "test_api_token"
+        assert actual.proxy == "http://testproxy:port"
 
     def test_from_file__wrong(self, mocker):
         # Arrange
@@ -478,11 +497,12 @@ class TestRiquConfig:
 
     def test_properties(self):
         # Act
-        actual = RiquConfig("dummpy_url", "dummy_api_token")
+        actual = RiquConfig("dummpy_url", "dummy_api_token", "http://dummy:1234")
 
         # Assert
         assert actual.url == "dummpy_url"
         assert actual.api_token == "dummy_api_token"
+        assert actual.proxy == "http://dummy:1234"
 
 
 class TestRiquSamplingBackend:
