@@ -200,10 +200,10 @@ class JobApi(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = []  # noqa: E501
+        auth_settings = ['apiKeyAuth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/jobs/{job_id}/download', 'GET',
+            '/ssejobs/{job_id}/download-log', 'GET',
             path_params,
             query_params,
             header_params,
@@ -418,6 +418,7 @@ class JobApi(object):
 
         :param async_req bool
         :param str up_file:
+        :param str remark:
         :param str job_type:
         :return: object
                  If the method is called asynchronously,
@@ -440,13 +441,14 @@ class JobApi(object):
 
         :param async_req bool
         :param str up_file:
+        :param str remark:
         :param str job_type:
         :return: object
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['up_file', 'job_type']  # noqa: E501
+        all_params = ['up_file', 'remark', 'job_type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -474,6 +476,8 @@ class JobApi(object):
         local_var_files = {}
         if 'up_file' in params:
             local_var_files['up_file'] = params['up_file']  # noqa: E501
+        if 'remark' in params:
+            form_params.append(('remark', params['remark']))  # noqa: E501
         if 'job_type' in params:
             form_params.append(('job_type', params['job_type']))  # noqa: E501
 
@@ -487,7 +491,7 @@ class JobApi(object):
             ['multipart/form-data'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = []  # noqa: E501
+        auth_settings = ['apiKeyAuth']  # noqa: E501
 
         return self.api_client.call_api(
             '/ssejobs', 'POST',

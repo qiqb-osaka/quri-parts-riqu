@@ -29,21 +29,26 @@ class SsejobsBody(object):
     """
     swagger_types = {
         'up_file': 'str',
+        'remark': 'str',
         'job_type': 'str'
     }
 
     attribute_map = {
         'up_file': 'up_file',
+        'remark': 'remark',
         'job_type': 'job_type'
     }
 
-    def __init__(self, up_file=None, job_type=None):  # noqa: E501
+    def __init__(self, up_file=None, remark=None, job_type=None):  # noqa: E501
         """SsejobsBody - a model defined in Swagger"""  # noqa: E501
         self._up_file = None
+        self._remark = None
         self._job_type = None
         self.discriminator = None
         if up_file is not None:
             self.up_file = up_file
+        if remark is not None:
+            self.remark = remark
         if job_type is not None:
             self.job_type = job_type
 
@@ -71,10 +76,33 @@ class SsejobsBody(object):
         self._up_file = up_file
 
     @property
+    def remark(self):
+        """Gets the remark of this SsejobsBody.  # noqa: E501
+
+        The remark for ssejob.  # noqa: E501
+
+        :return: The remark of this SsejobsBody.  # noqa: E501
+        :rtype: str
+        """
+        return self._remark
+
+    @remark.setter
+    def remark(self, remark):
+        """Sets the remark of this SsejobsBody.
+
+        The remark for ssejob.  # noqa: E501
+
+        :param remark: The remark of this SsejobsBody.  # noqa: E501
+        :type: str
+        """
+
+        self._remark = remark
+
+    @property
     def job_type(self):
         """Gets the job_type of this SsejobsBody.  # noqa: E501
 
-        Description of job type.  # noqa: E501
+        The remark for ssejob.  # noqa: E501
 
         :return: The job_type of this SsejobsBody.  # noqa: E501
         :rtype: str
@@ -85,7 +113,7 @@ class SsejobsBody(object):
     def job_type(self, job_type):
         """Sets the job_type of this SsejobsBody.
 
-        Description of job type.  # noqa: E501
+        The remark for ssejob.  # noqa: E501
 
         :param job_type: The job_type of this SsejobsBody.  # noqa: E501
         :type: str
