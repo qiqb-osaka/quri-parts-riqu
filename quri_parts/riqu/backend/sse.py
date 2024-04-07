@@ -45,7 +45,8 @@ class RiquSSEJob:
 
     def run_sse(
         self,
-        file_path: str
+        file_path: str,
+        remark: Optional[str] = ""
     ) -> RiquSamplingJob:
         # if file_path is not set, raise ValueError
         if file_path is None:
@@ -62,15 +63,17 @@ class RiquSSEJob:
         if ext != ".py":
             raise ValueError(f"The file is not python file: {file_path}")
 
-        job_type = 'sse'
         max_file_size = 10 * 1024 * 1024 # 10MB
 
         # if the file size is larger than max_file_size, raise ValueError
         if os.path.getsize(file_path) >= max_file_size:
             raise ValueError(f"file size is larger than {max_file_size}")
 
+        # set sse job type
+        jobType = "sse"
+
         try:
-            response = self._job_api.post_ssejob(up_file=file_path, job_type=job_type)
+            response = self._job_api.post_ssejob(up_file=file_path, remark=remark, job_type=jobType)
 
             job_id = response["job_id"]
 
@@ -91,7 +94,7 @@ class RiquSSEJob:
         # if job_id is not set, raise ValueError
         if job_id is None:
             if self.job is not None:
-                job_id = self.job.id()
+                job_id = self.job.id
             else:
                 raise ValueError("job_id is not set.")
 
