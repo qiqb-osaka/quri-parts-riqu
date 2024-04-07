@@ -37,6 +37,7 @@ from quri_parts.riqu.backend import (
 class MockRiquSamplingJob():
     def __init__(self, id=None):
         self.job_id = id
+    @property
     def id(self):
         return self.job_id
 
@@ -50,9 +51,10 @@ class MockJobApi():
         self.exception = exception
         return self
     
-    def post_ssejob(self, up_file=None, job_type=None):
+    def post_ssejob(self, up_file=None, job_type=None, remark=None):
         assert job_type == "sse"
         self.called_upfile = up_file
+        self.remark = remark
         #return {"job_id": "dummy_id"}
         if self.exception:
             raise self.exception
