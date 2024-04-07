@@ -35,6 +35,8 @@ class RiquSSEJob:
         # construct JobApi
         rest_config = Configuration()
         rest_config.host = self.config.url
+        if self.config.proxy:
+            rest_config.proxy = self.config.proxy
         api_client = ApiClient(
             configuration=rest_config,
             header_name="q-api-token",
