@@ -364,7 +364,7 @@ class RiquConfig:
         ValueError: If ``url`` or ``api_token`` is None.
     """
 
-    def __init__(self, url: str, api_token: str) -> None:
+    def __init__(self, url: str, api_token: str, proxy: Optional[str] = None) -> None:
         super().__init__()
 
         if url is None:
@@ -375,6 +375,8 @@ class RiquConfig:
             raise ValueError("api_token should not be None.")
         self._api_token: str = api_token
 
+        self._proxy: str = proxy
+
     @property
     def url(self) -> str:
         return self._url
@@ -382,6 +384,10 @@ class RiquConfig:
     @property
     def api_token(self) -> str:
         return self._api_token
+
+    @property
+    def proxy(self) -> Optional[str]:
+        return self._proxy
 
     @staticmethod
     def from_file(section: str = "default", path: str = "~/.riqu") -> "RiquConfig":
@@ -414,6 +420,7 @@ class RiquConfig:
                 [sectioB]
                 url=<base URL>
                 api_token=<API token>
+                proxy=http://<proxy>:<port>
 
             If ``sectionA`` settings are to be used, initialize ``RiquSamplingBackend`` as follows
 
@@ -429,6 +436,7 @@ class RiquConfig:
         config = RiquConfig(
             url=parser[section]["url"],
             api_token=parser[section]["api_token"],
+            proxy=parser[section].get("proxy", None)
         )
         return config
 
@@ -454,6 +462,8 @@ class RiquSamplingBackend(SamplingBackend):
         # construct JobApi
         rest_config = Configuration()
         rest_config.host = config.url
+        if config.proxy:
+            rest_config.proxy = config.proxy
         api_client = ApiClient(
             configuration=rest_config,
             header_name="q-api-token",
