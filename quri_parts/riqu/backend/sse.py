@@ -20,7 +20,7 @@ from quri_parts.backend import (
 from .sampling import RiquSamplingBackend, RiquConfig, RiquSamplingJob
 from ..rest import ApiClient, Configuration, JobApi
 
-class RiquSSEJob:
+class RiquSseJob:
  
     def __init__(
         self,

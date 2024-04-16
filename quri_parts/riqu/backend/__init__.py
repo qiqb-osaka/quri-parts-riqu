@@ -16,7 +16,7 @@ from .sampling import (
 )
 
 from .sse import (
-    RiquSSEJob,
+    RiquSseJob,
 )
 
 __all__ = [
@@ -24,5 +24,5 @@ __all__ = [
     "RiquSamplingBackend",
     "RiquSamplingJob",
     "RiquSamplingResult",
-    "RiquSSEJob",
+    "RiquSseJob",
 ]
