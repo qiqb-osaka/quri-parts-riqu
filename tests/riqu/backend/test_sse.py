@@ -31,7 +31,7 @@ from quri_parts.backend import BackendError
 from quri_parts.riqu.rest import Job, JobsBody
 from quri_parts.riqu.backend import (
     RiquConfig,
-    RiquSSEJob,
+    RiquSseJob,
 )
 
 class MockRiquSamplingJob():
@@ -135,13 +135,13 @@ def get_dummy_config() -> RiquConfig:
     config = RiquConfig("dummpy_url", "dummy_api_token")
     return config
 
-class TestRiquSSEJob:
+class TestRiquSseJob:
     def test_init(self):
         # Arrange
         config = get_dummy_config()
 
         # Act
-        sse_job = RiquSSEJob(config)
+        sse_job = RiquSseJob(config)
 
         # Assert
         assert sse_job.config == config
@@ -157,7 +157,7 @@ class TestRiquSSEJob:
         )
 
         # Act
-        sse_job = RiquSSEJob()
+        sse_job = RiquSseJob()
         assert sse_job.config == config
         assert sse_job.job is None
         assert sse_job._job_api.api_client.configuration.host == config.url
@@ -174,7 +174,7 @@ class TestRiquSSEJob:
             return_value=job,
         )
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job._job_api = MockJobApi().setReturn(ret={"job_id": "dummy_id"}, exception=None)
 
         # Act
@@ -186,7 +186,7 @@ class TestRiquSSEJob:
 
     def test_run_sse_invalid_arg(self):
         # Act
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         with pytest.raises(ValueError) as e:
             sse_job.run_sse(None)
 
@@ -196,7 +196,7 @@ class TestRiquSSEJob:
     def test_run_sse_nofile(self, mocker):
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=False)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
 
         # Act
         with pytest.raises(ValueError) as e:
@@ -210,7 +210,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=True)
         mocker.patch("quri_parts.riqu.backend.sse.os.path.getsize", return_value=10*1024*1024)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
 
         # Act
         with pytest.raises(ValueError) as e:
@@ -223,7 +223,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=True)
         mocker.patch("quri_parts.riqu.backend.sse.os.path.getsize", return_value=10*1024*1024)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
 
         # Act
         with pytest.raises(ValueError) as e:
@@ -236,7 +236,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=True)
         mocker.patch("quri_parts.riqu.backend.sse.os.path.getsize", return_value=9*1024*1024)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job._job_api = MockJobApi().setReturn(ret=None, exception=Exception())
 
         # Act
@@ -251,7 +251,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=True)
         mocker.patch("quri_parts.riqu.backend.sse.os.path.getsize", return_value=9*1024*1024)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job._job_api = MockJobApi().setReturn(ret={"dummy": "dummy_id"}, exception=None)
 
         # Act
@@ -266,7 +266,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=True)
         mocker.patch("quri_parts.riqu.backend.sse.os.path.getsize", return_value=9*1024*1024)
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job._job_api = MockJobApi().setReturn(ret=None, exception=None)
 
         # Act
@@ -287,7 +287,7 @@ class TestRiquSSEJob:
             side_effect=Exception("dummy error"),
         )
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job._job_api = MockJobApi().setReturn(ret={"job_id": "dummy_id"}, exception=None)
 
         # Act
@@ -306,7 +306,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": "dummy.zip"}, exception=None)
 
@@ -327,7 +327,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": "dummy.zip"}, exception=None)
 
@@ -344,7 +344,7 @@ class TestRiquSSEJob:
         # Arrange
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", return_value=False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = None
         # Act
         with pytest.raises(ValueError) as e:
@@ -362,7 +362,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": "dummy.zip"}, exception=None)
 
@@ -384,7 +384,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": "dummy.zip"}, exception=None)
 
@@ -404,7 +404,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": "dummy.zip"}, exception=None)
 
@@ -421,7 +421,7 @@ class TestRiquSSEJob:
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", 
                 side_effect=lambda path : True if path == "destination/path" else False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret=None, exception=Exception())
 
@@ -438,7 +438,7 @@ class TestRiquSSEJob:
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", 
                 side_effect=lambda path : True if path == "destination/path" else False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         sse_job._job_api = MockJobApi().setReturn(ret=None, exception=None)
 
@@ -456,7 +456,7 @@ class TestRiquSSEJob:
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", 
                 side_effect=lambda path : True if path == "destination/path" else False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## file is None
         sse_job._job_api = MockJobApi().setReturn(ret={"file": None, "filename": "dummy.zip"}, exception=None)
@@ -477,7 +477,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## filename is None
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": None}, exception=None)
@@ -495,7 +495,7 @@ class TestRiquSSEJob:
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", 
                 side_effect=lambda path : True if path == "destination/path" else False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## file is emtpy
         sse_job._job_api = MockJobApi().setReturn(ret={"file": "", "filename": "dummy.zip"}, exception=None)
@@ -516,7 +516,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## filename is emtpy
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded, "filename": ""}, exception=None)
@@ -535,7 +535,7 @@ class TestRiquSSEJob:
         mocker.patch("quri_parts.riqu.backend.sse.os.path.exists", 
                 side_effect=lambda path : True if path == "destination/path" else False)
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## contains no file
         sse_job._job_api = MockJobApi().setReturn(ret={ "filename": "dummy.zip"}, exception=None)
@@ -556,7 +556,7 @@ class TestRiquSSEJob:
         ## make zip stream to be downloaded
         encoded, zip_bytes = get_dummy_base64zip()
 
-        sse_job = RiquSSEJob(get_dummy_config())
+        sse_job = RiquSseJob(get_dummy_config())
         sse_job.job = MockRiquSamplingJob(id="dummy_id")
         ## contains no filename
         sse_job._job_api = MockJobApi().setReturn(ret={"file": encoded}, exception=None)
