@@ -493,7 +493,7 @@ class RiquSamplingBackend(SamplingBackend):
 
     def sample(
         self,
-        circuit: NonParametricQuantumCircuit,
+        circuit: NonParametricQuantumCircuit | list[NonParametricQuantumCircuit],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
@@ -517,13 +517,20 @@ class RiquSamplingBackend(SamplingBackend):
             ValueError: If ``n_shots`` is not a positive integer.
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
-        qasm = convert_to_qasm_str(circuit)
-        job = self.sample_qasm(qasm, n_shots, transpiler, remark)
+        if type(circuit) is not list:
+            circuit_list = [circuit]
+        else:
+            circuit_list = circuit
+
+        qasm_list = [convert_to_qasm_str(c) for c in circuit_list]
+        job = self.sample_qasm(qasm_list, n_shots, transpiler, remark)
+        #qasm = convert_to_qasm_str(circuit)
+        #job = self.sample_qasm(qasm, n_shots, transpiler, remark)
         return job
 
     def sample_qasm(
         self,
-        qasm: str,
+        qasm: str | list[str],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
