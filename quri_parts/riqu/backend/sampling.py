@@ -517,15 +517,16 @@ class RiquSamplingBackend(SamplingBackend):
             ValueError: If ``n_shots`` is not a positive integer.
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
-        if type(circuit) is not list:
-            circuit_list = [circuit]
+        if type(circuit) is list:
+            qasms_dict = {"qasm": [convert_to_qasm_str(c) for c in circuit]}
+            qasm_str = json.dumps(qasms_dict)
+            job_type = "multi_manual"
         else:
-            circuit_list = circuit
+            qasm_str = convert_to_qasm_str(circuit)
+            job_type = "normal"
 
-        qasm_list = [convert_to_qasm_str(c) for c in circuit_list]
-        job = self.sample_qasm(qasm_list, n_shots, transpiler, remark)
-        #qasm = convert_to_qasm_str(circuit)
-        #job = self.sample_qasm(qasm, n_shots, transpiler, remark)
+        job = self.sample_qasm(qasm_str, n_shots, transpiler, remark, job_type)
+
         return job
 
     def sample_qasm(
@@ -534,6 +535,7 @@ class RiquSamplingBackend(SamplingBackend):
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
+        job_type: Optional[str] = None
     ) -> SamplingJob:
         """Perform a sampling measurement of a OpenQASM 3.0 program.
 
@@ -558,7 +560,7 @@ class RiquSamplingBackend(SamplingBackend):
 
         try:
             body = JobsBody(
-                qasm=qasm, shots=n_shots, transpiler=transpiler, remark=remark
+                qasm=qasm, shots=n_shots, transpiler=transpiler, remark=remark, job_type=job_type
             )
             response_post_job = self._job_api.post_job(body=body)
             response = self._job_api.get_job(response_post_job.job_id)
