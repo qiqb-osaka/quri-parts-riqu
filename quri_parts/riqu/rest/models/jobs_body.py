@@ -31,22 +31,25 @@ class JobsBody(object):
         'qasm': 'str',
         'transpiler': 'str',
         'shots': 'int',
-        'remark': 'str'
+        'remark': 'str',
+        'job_type': 'str'
     }
 
     attribute_map = {
         'qasm': 'qasm',
         'transpiler': 'transpiler',
         'shots': 'shots',
-        'remark': 'remark'
+        'remark': 'remark',
+        'job_type': 'job_type'
     }
 
-    def __init__(self, qasm=None, transpiler=None, shots=None, remark=None):  # noqa: E501
+    def __init__(self, qasm=None, transpiler=None, shots=None, remark=None, job_type=None):  # noqa: E501
         """JobsBody - a model defined in Swagger"""  # noqa: E501
         self._qasm = None
         self._transpiler = None
         self._shots = None
         self._remark = None
+        self._job_type = None
         self.discriminator = None
         self.qasm = qasm
         if transpiler is not None:
@@ -54,6 +57,8 @@ class JobsBody(object):
         self.shots = shots
         if remark is not None:
             self.remark = remark
+        if job_type is not None:
+            self.job_type = job_type
 
     @property
     def qasm(self):
@@ -144,6 +149,27 @@ class JobsBody(object):
         """
 
         self._remark = remark
+
+    @property
+    def job_type(self):
+        """Gets the job_type of this JobsBody.  # noqa: E501
+
+
+        :return: The job_type of this JobsBody.  # noqa: E501
+        :rtype: str
+        """
+        return self._job_type
+
+    @job_type.setter
+    def job_type(self, job_type):
+        """Sets the job_type of this JobsBody.
+
+
+        :param job_type: The job_type of this JobsBody.  # noqa: E501
+        :type: str
+        """
+
+        self._job_type = job_type
 
     def to_dict(self):
         """Returns the model properties as a dict"""
