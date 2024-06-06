@@ -4,7 +4,7 @@ build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.poetry]
 name = "quri-parts-riqu"
-version = "0.2.1"
+version = "0.3.0"
 description = "QURI Parts riqu is a support library for using quantum computers provided by the cloud server with riqu (Rest Interface for QUantum computing) interface."
 license = "Apache-2.0"
 authors = ["QIQB, Osaka University"]
@@ -36,21 +36,27 @@ quri-parts-circuit = "*"
 quri-parts-core = "*"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.0.1"
+pytest = ">=7.0.1,<9.0.0"
 pytest-mock = "^3.8.0"
-black = "^22.1.0"
-flake8 = "^4.0.1"
-mypy = ">=0.950"
-docformatter = "^1.4"
+
+[tool.poetry.group.lint.dependencies]
+black = "^23.1.0"
+flake8 = ">=4.0.1,<8.0.0"
+docformatter = "^1.4,!=1.6.0"
 isort = "^5.10.1"
 
-Sphinx = "^4.4.0"
-furo = "^2022.2.23"
+[tool.poetry.group.typecheck.dependencies]
+mypy = ">=0.950"
+
+[tool.poetry.group.doc.dependencies]
+Sphinx = ">=4.4,<8.0"
+furo = ">=2022.2.23,<2024.0.0"
 sphinx-autobuild = "^2021.3.14"
-nbsphinx = "^0.8.9"
+nbsphinx = ">=0.8.9,<0.10.0"
 ipython = "^8.4.0"
-notebook = "^6.4.12"
-myst-parser = "^0.18.1"
+notebook = ">=6.4.12,<8.0.0"
+myst-parser = ">=0.18.1,<2.1.0"
+pypandoc = "^1.13"
 
 [tool.black]
 line-length = 88

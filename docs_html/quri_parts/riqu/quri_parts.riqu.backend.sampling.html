@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="quri_parts.riqu.rest package" href="quri_parts.riqu.rest.html" /><link rel="prev" title="quri_parts.riqu.backend package" href="quri_parts.riqu.backend.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="quri_parts.riqu.backend.sse module" href="quri_parts.riqu.backend.sse.html" /><link rel="prev" title="quri_parts.riqu.backend package" href="quri_parts.riqu.backend.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2023.09.10 -->
         <title>quri_parts.riqu.backend.sampling module - QURI Parts riqu documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -149,33 +149,35 @@
   <span class="sidebar-brand-text">QURI Parts riqu  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials/sampling_on_riqu_server.html">Sampling on riqu server</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../../reference.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="quri_parts.riqu.html">quri_parts.riqu package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current has-children"><a class="reference internal" href="quri_parts.riqu.backend.html">quri_parts.riqu.backend package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../reference.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="quri_parts.riqu.html">quri_parts.riqu package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of quri_parts.riqu package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="quri_parts.riqu.backend.html">quri_parts.riqu.backend package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of quri_parts.riqu.backend package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l4 current current-page"><a class="current reference internal" href="#">quri_parts.riqu.backend.sampling module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quri_parts.riqu.backend.sse.html">quri_parts.riqu.backend.sse module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="quri_parts.riqu.rest.html">quri_parts.riqu.rest package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.api.html">quri_parts.riqu.rest.api package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="quri_parts.riqu.rest.html">quri_parts.riqu.rest package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of quri_parts.riqu.rest package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.api.html">quri_parts.riqu.rest.api package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of quri_parts.riqu.rest.api package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.api.job_api.html">quri_parts.riqu.rest.api.job_api module</a></li>
 </ul>
 </li>
-<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.models.html">quri_parts.riqu.rest.models package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="quri_parts.riqu.rest.models.html">quri_parts.riqu.rest.models package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of quri_parts.riqu.rest.models package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.inline_response201.html">quri_parts.riqu.rest.models.inline_response201 module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.inline_response400.html">quri_parts.riqu.rest.models.inline_response400 module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.job.html">quri_parts.riqu.rest.models.job module</a></li>
 <li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.jobs_body.html">quri_parts.riqu.rest.models.jobs_body module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="quri_parts.riqu.rest.models.ssejobs_body.html">quri_parts.riqu.rest.models.ssejobs_body module</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="quri_parts.riqu.rest.api_client.html">quri_parts.riqu.rest.api_client module</a></li>
@@ -215,14 +217,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section id="module-quri_parts.riqu.backend.sampling">
-<span id="quri-parts-riqu-backend-sampling-module"></span><h1>quri_parts.riqu.backend.sampling module<a class="headerlink" href="#module-quri_parts.riqu.backend.sampling" title="Permalink to this headline">#</a></h1>
+<span id="quri-parts-riqu-backend-sampling-module"></span><h1>quri_parts.riqu.backend.sampling module<a class="headerlink" href="#module-quri_parts.riqu.backend.sampling" title="Link to this heading">¶</a></h1>
 <p>A module to perform sampling on riqu server.</p>
 <p>Before sampling, sign up for riqu server and create a configuration file in
 path <code class="docutils literal notranslate"><span class="pre">~/.riqu</span></code>. See the description of <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig.from_file" title="quri_parts.riqu.backend.sampling.RiquConfig.from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">RiquConfig.from_file()</span></code></a> method
@@ -289,11 +291,11 @@ for how to write <code class="docutils literal notranslate"><span class="pre">~/
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">quri_parts.backend.SamplingResult</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingResult</span></code></p>
 <p>A result of a riqu sampling job.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>result</strong> – <p>A result of dict type.
 This dict should have the key <code class="docutils literal notranslate"><span class="pre">counts</span></code>.
 The value of <code class="docutils literal notranslate"><span class="pre">counts</span></code> is the dict input for the counts.
@@ -304,7 +306,7 @@ then <code class="docutils literal notranslate"><span class="pre">properties</sp
 to the index of the quantum circuit.</p>
 </p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">counts</span></code> or <code class="docutils literal notranslate"><span class="pre">properties</span></code> does not exist in result.</p>
 </dd>
 </dl>
@@ -338,13 +340,13 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <code class="docutils literal notranslate"><span class="pre">measurement_window_index</span></code> are set to 0, 1, 2, …</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingResult.counts">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">collections.abc.Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.counts" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.counts" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the dict input for the counts.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingResult.properties">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">properties</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.properties" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">properties</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.properties" title="Link to this definition">¶</a></dt>
 <dd><p>Returns properties.</p>
 </dd></dl>
 
@@ -352,99 +354,99 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 
 <dl class="py class">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingJob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="quri_parts.riqu.rest.models.job.html#quri_parts.riqu.rest.models.job.Job" title="quri_parts.riqu.rest.models.job.Job"><span class="pre">quri_parts.riqu.rest.models.job.Job</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="quri_parts.riqu.rest.api.job_api.html#quri_parts.riqu.rest.api.job_api.JobApi" title="quri_parts.riqu.rest.api.job_api.JobApi"><span class="pre">quri_parts.riqu.rest.api.job_api.JobApi</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">quri_parts.backend.SamplingJob</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingJob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="quri_parts.riqu.rest.models.job.html#quri_parts.riqu.rest.models.job.Job" title="quri_parts.riqu.rest.models.job.Job"><span class="pre">Job</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="quri_parts.riqu.rest.api.job_api.html#quri_parts.riqu.rest.api.job_api.JobApi" title="quri_parts.riqu.rest.api.job_api.JobApi"><span class="pre">JobApi</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingJob</span></code></p>
 <p>A job for a riqu sampling measurement.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Job</strong> – A result of dict type.</p></li>
 <li><p><strong>job_api</strong> – A result of dict type.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">job</span></code> or <code class="docutils literal notranslate"><span class="pre">job_api</span></code> is None.</p>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.id" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.id" title="Link to this definition">¶</a></dt>
 <dd><p>The id of the job.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm" title="Link to this definition">¶</a></dt>
 <dd><p>The circuit converted to OpenQASM 3.0 format.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiled_qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiled_qasm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm" title="Link to this definition">¶</a></dt>
 <dd><p>The circuit in OpenQASM 3.0 format transpiled by riqu server.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiler</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler" title="Link to this definition">¶</a></dt>
 <dd><p>The transpiler setting.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.shots">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.shots" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.shots" title="Link to this definition">¶</a></dt>
 <dd><p>Number of repetitions of each circuit, for sampling.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.status">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.status" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.status" title="Link to this definition">¶</a></dt>
 <dd><p>The status of Job.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.created">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">created</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.created" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">created</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.created" title="Link to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when riqu server received the new job.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue" title="Link to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when the job is in queue.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">out_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">out_queue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue" title="Link to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when the job is out queue.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.ended">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ended</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime.datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.ended" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ended</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.ended" title="Link to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> when the job is ended.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.remark">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remark</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.remark" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remark</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.remark" title="Link to this definition">¶</a></dt>
 <dd><p>The remark to be assigned to the job.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.refresh">
-<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.refresh" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.refresh" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieves the latest job information from riqu server.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.wait_for_completion">
-<span class="sig-name descname"><span class="pre">wait_for_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="quri_parts.riqu.rest.models.job.html#quri_parts.riqu.rest.models.job.Job" title="quri_parts.riqu.rest.models.job.Job"><span class="pre">quri_parts.riqu.rest.models.job.Job</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.wait_for_completion" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">wait_for_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="quri_parts.riqu.rest.models.job.html#quri_parts.riqu.rest.models.job.Job" title="quri_parts.riqu.rest.models.job.Job"><span class="pre">Job</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.wait_for_completion" title="Link to this definition">¶</a></dt>
 <dd><p>Waits until the job progress to the end such as <code class="docutils literal notranslate"><span class="pre">success</span></code> or
 <code class="docutils literal notranslate"><span class="pre">failure</span></code>, <code class="docutils literal notranslate"><span class="pre">cancelled</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>timeout</strong> – The number of seconds to wait for job.</p></li>
 <li><p><strong>wait</strong> – Time in seconds between queries.</p></li>
@@ -455,7 +457,7 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.result">
-<span class="sig-name descname"><span class="pre">result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingResult</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.result" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">SamplingResult</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.result" title="Link to this definition">¶</a></dt>
 <dd><p>Waits until the job progress to the end and returns the result of
 the job.</p>
 <p>If the status of job is not <code class="docutils literal notranslate"><span class="pre">success</span></code>, <code class="docutils literal notranslate"><span class="pre">failure</span></code>, or <code class="docutils literal notranslate"><span class="pre">cancelled</span></code>,
@@ -463,13 +465,13 @@ the job is retrieved from riqu server at intervals of <code class="docutils lite
 If the job does not progress to the end after <code class="docutils literal notranslate"><span class="pre">timeout</span></code> seconds,
 raise <code class="xref py py-class docutils literal notranslate"><span class="pre">BackendError</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>timeout</strong> – The number of seconds to wait for job.</p></li>
 <li><p><strong>wait</strong> – Time in seconds between queries.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>BackendError</strong> – If job cannot be found or if an authentication error occurred
     or timeout occurs, etc.</p>
 </dd>
@@ -478,12 +480,12 @@ raise <code class="xref py py-class docutils literal notranslate"><span class="p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingJob.cancel">
-<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.cancel" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.cancel" title="Link to this definition">¶</a></dt>
 <dd><p>Cancels the job.</p>
 <p>If the job statuses are success, failure, or cancelled,
 then cannot be cancelled and an error occurs.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>BackendError</strong> – If job cannot be found or if an authentication error occurred
     or if job cannot be cancelled, etc.</p>
 </dd>
@@ -494,42 +496,47 @@ then cannot be cancelled and an error occurs.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquConfig">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A configuration information class for using riqu backend.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> – Base URL for riqu server.</p></li>
 <li><p><strong>api_token</strong> – API token for riqu server.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">url</span></code> or <code class="docutils literal notranslate"><span class="pre">api_token</span></code> is None.</p>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquConfig.url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.url" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.url" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquConfig.api_token">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.api_token" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api_token</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.api_token" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquConfig.proxy">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">proxy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.proxy" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquConfig.from_file">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'~/.riqu'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><span class="pre">quri_parts.riqu.backend.sampling.RiquConfig</span></a></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.from_file" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'~/.riqu'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><span class="pre">RiquConfig</span></a></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquConfig.from_file" title="Link to this definition">¶</a></dt>
 <dd><p>Reads configuration information from a file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>section</strong> – A <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> for circuit execution.</p></li>
 <li><p><strong>path</strong> – A path for config file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Configuration information <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> .</p>
 </dd>
 </dl>
@@ -550,6 +557,7 @@ An example of a configuration file description is as below:</p>
 <span class="p">[</span><span class="n">sectioB</span><span class="p">]</span>
 <span class="n">url</span><span class="o">=&lt;</span><span class="n">base</span> <span class="n">URL</span><span class="o">&gt;</span>
 <span class="n">api_token</span><span class="o">=&lt;</span><span class="n">API</span> <span class="n">token</span><span class="o">&gt;</span>
+<span class="n">proxy</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">proxy</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">sectionA</span></code> settings are to be used, initialize <code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend</span></code> as follows</p>
@@ -562,24 +570,24 @@ An example of a configuration file description is as below:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><span class="pre">quri_parts.riqu.backend.sampling.RiquConfig</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">quri_parts.backend.SamplingBackend</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quri_parts.riqu.backend.sampling.</span></span><span class="sig-name descname"><span class="pre">RiquSamplingBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><span class="pre">RiquConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingBackend</span></code></p>
 <p>A riqu backend for a sampling measurement.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>config</strong> – A <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> for circuit execution.
 If this parameter is None, <code class="docutils literal notranslate"><span class="pre">default</span></code> section in <code class="docutils literal notranslate"><span class="pre">~/.riqu</span></code> file is read.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample">
-<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">quri_parts.circuit.circuit.NonParametricQuantumCircuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NonParametricQuantumCircuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample" title="Link to this definition">¶</a></dt>
 <dd><p>Perform a sampling measurement of a circuit.</p>
 <p>The circuit is transpiled on riqu server.
 The QURI Parts transpiling feature is not supported.
 The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> – The circuit to be sampled.</p></li>
 <li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
@@ -587,10 +595,10 @@ The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 <li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The job to be executed.</p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">n_shots</span></code> is not a positive integer.</p></li>
 <li><p><strong>BackendError</strong> – If job is wrong or if an authentication error occurred, etc.</p></li>
@@ -601,12 +609,12 @@ The circuit is converted to OpenQASM 3.0 format and sent to riqu server.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm">
-<span class="sig-name descname"><span class="pre">sample_qasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">quri_parts.backend.SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">sample_qasm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpiler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remark</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">SamplingJob</span></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm" title="Link to this definition">¶</a></dt>
 <dd><p>Perform a sampling measurement of a OpenQASM 3.0 program.</p>
 <p>The OpenQASM 3.0 program is transpiled on riqu server.
 The QURI Parts transpiling feature is not supported.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qasm</strong> – The OpenQASM 3.0 program to be sampled.</p></li>
 <li><p><strong>n_shots</strong> – Number of repetitions of each circuit, for sampling.</p></li>
@@ -614,10 +622,10 @@ The QURI Parts transpiling feature is not supported.</p>
 <li><p><strong>remark</strong> – The remark to be assigned to the job.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The job to be executed.</p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">n_shots</span></code> is not a positive integer.</p></li>
 <li><p><strong>BackendError</strong> – If job is wrong or if an authentication error occurred, etc.</p></li>
@@ -628,16 +636,16 @@ The QURI Parts transpiling feature is not supported.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.sampling.RiquSamplingBackend.retrieve_job">
-<span class="sig-name descname"><span class="pre">retrieve_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob" title="quri_parts.riqu.backend.sampling.RiquSamplingJob"><span class="pre">quri_parts.riqu.backend.sampling.RiquSamplingJob</span></a></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.retrieve_job" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">retrieve_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob" title="quri_parts.riqu.backend.sampling.RiquSamplingJob"><span class="pre">RiquSamplingJob</span></a></span></span><a class="headerlink" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.retrieve_job" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieves the job with the given id from riqu server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>job_id</strong> – The id of the job to retrieve.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The job with the given <code class="docutils literal notranslate"><span class="pre">job_id</span></code>.</p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>BackendError</strong> – If job cannot be found or if an authentication error occurred,
     etc.</p>
 </dd>
@@ -653,12 +661,12 @@ The QURI Parts transpiling feature is not supported.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quri_parts.riqu.rest.html">
+          <a class="next-page" href="quri_parts.riqu.backend.sse.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">quri_parts.riqu.rest package</div>
+                <div class="title">quri_parts.riqu.backend.sse module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -685,25 +693,76 @@ The QURI Parts transpiling feature is not supported.</p>
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">quri_parts.riqu.backend.sampling module</a><ul>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult</span></code></a><ul>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.counts"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.counts</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingResult.properties"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.properties</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob</span></code></a><ul>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.id"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.id</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.qasm"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.qasm</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiled_qasm"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.transpiled_qasm</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.transpiler"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.transpiler</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.shots"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.shots</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.status"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.status</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.created"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.created</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.in_queue"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.in_queue</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.out_queue"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.out_queue</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.ended"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.ended</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.remark"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.remark</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.refresh"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.refresh()</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.wait_for_completion"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.wait_for_completion()</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.result"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.result()</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingJob.cancel"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob.cancel()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig"><code class="docutils literal notranslate"><span class="pre">RiquConfig</span></code></a><ul>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig.url"><code class="docutils literal notranslate"><span class="pre">RiquConfig.url</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig.api_token"><code class="docutils literal notranslate"><span class="pre">RiquConfig.api_token</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig.proxy"><code class="docutils literal notranslate"><span class="pre">RiquConfig.proxy</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig.from_file"><code class="docutils literal notranslate"><span class="pre">RiquConfig.from_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend"><code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend</span></code></a><ul>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample"><code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend.sample()</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.sample_qasm"><code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend.sample_qasm()</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquSamplingBackend.retrieve_job"><code class="docutils literal notranslate"><span class="pre">RiquSamplingBackend.retrieve_job()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/scripts/furo.js"></script>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>
