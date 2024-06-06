@@ -1,3 +1,4 @@
+# this file is for readthedocs
 nbsphinx
 myst_parser
 furo
