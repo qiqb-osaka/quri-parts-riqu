@@ -16,3 +16,4 @@ Submodules
    quri_parts.riqu.rest.models.inline_response400
    quri_parts.riqu.rest.models.job
    quri_parts.riqu.rest.models.jobs_body
+   quri_parts.riqu.rest.models.ssejobs_body

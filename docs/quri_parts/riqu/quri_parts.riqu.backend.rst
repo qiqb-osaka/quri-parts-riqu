@@ -13,3 +13,4 @@ Submodules
    :maxdepth: 4
 
    quri_parts.riqu.backend.sampling
+   quri_parts.riqu.backend.sse
