@@ -58,6 +58,7 @@ html_theme = "furo"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
+nbsphinx_execute = "never"
 
 # -- Extension configuration -------------------------------------------------
 autodoc_member_order = "bysource"
