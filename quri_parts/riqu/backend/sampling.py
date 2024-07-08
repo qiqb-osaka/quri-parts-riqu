@@ -169,6 +169,7 @@ class RiquSamplingResult(SamplingResult):
         if "properties" not in result:
             raise ValueError("properties does not exist in result.")
 
+        self._result = result
         self._counts = result["counts"]
         self._properties = result["properties"]
 

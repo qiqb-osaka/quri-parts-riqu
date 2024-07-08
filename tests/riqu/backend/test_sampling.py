@@ -181,6 +181,33 @@ class TestRiquSamplingResult:
         }
         assert actual == expected
 
+    def test_repr(self):
+        # Arrage
+        result_dict = {
+            "counts": {
+                0: 6000,
+                2: 4000,
+            },
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0
+                }
+            }
+        }
+        result = RiquSamplingResult(result_dict)
+
+        # Act
+        actual = result.__repr__()
+
+        # Assert
+        expected = str(result_dict)
+        assert actual == expected
+
 
 class TestRiquSamplingJob:
     def test_init_error(self):
