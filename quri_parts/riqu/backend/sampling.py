@@ -92,7 +92,7 @@ import json
 import os
 import time
 from collections import Counter
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 from quri_parts.backend import (
     BackendError,
@@ -168,7 +168,7 @@ class RiquSamplingResult(SamplingResult):
         
     """
 
-    def __init__(self, result: Dict[str, Any]) -> None:
+    def __init__(self, result: dict[str, Any]) -> None:
         super().__init__()
 
         if "counts" not in result:
@@ -188,12 +188,12 @@ class RiquSamplingResult(SamplingResult):
         return self._counts
 
     @property
-    def properties(self) -> Dict:
+    def properties(self) -> dict:
         """Returns properties."""
         return self._properties
 
     @property
-    def transpiler_info(self) -> Dict:
+    def transpiler_info(self) -> dict:
         """Returns transpiler_info."""
         return self._transpiler_info
 
@@ -315,7 +315,7 @@ class RiquSamplingJob(SamplingJob):
         return self._job
 
     def result(
-        self, timeout: Optional[float] = None, wait: float = 10.0
+        self, timeout: Optional[float] = None, wait: Optional[float] = 10.0
     ) -> SamplingResult:
         """Waits until the job progress to the end and returns the result of
         the job.
@@ -410,7 +410,7 @@ class RiquConfig:
         return self._proxy
 
     @staticmethod
-    def from_file(section: str = "default", path: str = "~/.riqu") -> "RiquConfig":
+    def from_file(section: Optional[str] = "default", path: Optional[str] = "~/.riqu") -> "RiquConfig":
         """Reads configuration information from a file.
 
         Args:
