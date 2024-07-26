@@ -157,6 +157,7 @@
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials/sampling_on_riqu_server.html">Sampling on riqu server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/qaoa_with_server_side_execution.html">QAOA with Server Side Execution</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contribution Guidelines</a></li>
@@ -559,13 +560,20 @@ to the index of the quantum circuit.</p>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;qubit_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;qubit_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+            <span class="s2">&quot;measurement_window_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;transpiler_info&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;physical_virtual_mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;SUCCESS!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -586,6 +594,18 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <dt class="sig sig-object py" id="quri_parts.riqu.backend.RiquSamplingResult.properties">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">properties</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.RiquSamplingResult.properties" title="Link to this definition">¶</a></dt>
 <dd><p>Returns properties.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.RiquSamplingResult.transpiler_info">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transpiler_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span></em><a class="headerlink" href="#quri_parts.riqu.backend.RiquSamplingResult.transpiler_info" title="Link to this definition">¶</a></dt>
+<dd><p>Returns transpiler_info.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="quri_parts.riqu.backend.RiquSamplingResult.message">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#quri_parts.riqu.backend.RiquSamplingResult.message" title="Link to this definition">¶</a></dt>
+<dd><p>Returns message.</p>
 </dd></dl>
 
 </dd></dl>
@@ -614,6 +634,8 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <li class="toctree-l2"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingResult"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingResult.counts"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.counts</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingResult.properties"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingResult.transpiler_info"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.transpiler_info</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingResult.message"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.message</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="quri_parts.riqu.backend.sampling.html#quri_parts.riqu.backend.sampling.RiquSamplingJob"><code class="docutils literal notranslate"><span class="pre">RiquSamplingJob</span></code></a><ul>
@@ -752,6 +774,8 @@ The LSB (Least Significant Bit) of the bit string representation is <code class=
 <li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSamplingResult"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult</span></code></a><ul>
 <li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSamplingResult.counts"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.counts</span></code></a></li>
 <li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSamplingResult.properties"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.properties</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSamplingResult.transpiler_info"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.transpiler_info</span></code></a></li>
+<li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSamplingResult.message"><code class="docutils literal notranslate"><span class="pre">RiquSamplingResult.message</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#quri_parts.riqu.backend.RiquSseJob"><code class="docutils literal notranslate"><span class="pre">RiquSseJob</span></code></a><ul>
