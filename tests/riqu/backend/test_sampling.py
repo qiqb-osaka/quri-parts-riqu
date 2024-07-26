@@ -125,13 +125,20 @@ class TestRiquSamplingResult:
             "properties": {
                 0: {
                     "qubit_index": 0,
-                    "measurement_window_index": 0
+                    "measurement_window_index": 0,
                 },
                 1: {
                     "qubit_index": 1,
-                    "measurement_window_index": 0
-                }
-            }
+                    "measurement_window_index": 0,
+                },
+            },
+            "transpiler_info": {
+                "physical_virtual_mapping": {
+                    "0": 1,
+                    "1": 0,
+                },
+            },
+            "message": "SUCCESS!",
         }
         result = RiquSamplingResult(result_dict)
 
@@ -155,13 +162,20 @@ class TestRiquSamplingResult:
             "properties": {
                 0: {
                     "qubit_index": 0,
-                    "measurement_window_index": 0
+                    "measurement_window_index": 0,
                 },
                 1: {
                     "qubit_index": 1,
-                    "measurement_window_index": 0
-                }
-            }
+                    "measurement_window_index": 0,
+                },
+            },
+            "transpiler_info": {
+                "physical_virtual_mapping": {
+                    "0": 1,
+                    "1": 0,
+                },
+            },
+            "message": "SUCCESS!",
         }
         result = RiquSamplingResult(result_dict)
 
@@ -172,13 +186,86 @@ class TestRiquSamplingResult:
         expected = {
             0: {
                 "qubit_index": 0,
-                "measurement_window_index": 0
+                "measurement_window_index": 0,
             },
             1: {
                 "qubit_index": 1,
-                "measurement_window_index": 0
+                "measurement_window_index": 0,
             }
         }
+        assert actual == expected
+
+    def test_transpiler_info(self):
+        # Arrange
+        result_dict = {
+            "counts": {
+                0: 6000,
+                2: 4000,
+            },
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0,
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0,
+                },
+            },
+            "transpiler_info": {
+                "physical_virtual_mapping": {
+                    "0": 1,
+                    "1": 0,
+                },
+            },
+            "message": "SUCCESS!",
+        }
+        result = RiquSamplingResult(result_dict)
+
+        # Act
+        actual = result.transpiler_info
+
+        # Assert
+        expected = {
+            "physical_virtual_mapping": {
+                "0": 1,
+                "1": 0,
+            },
+        }
+        assert actual == expected
+
+    def test_message(self):
+        # Arrange
+        result_dict = {
+            "counts": {
+                0: 6000,
+                2: 4000,
+            },
+            "properties": {
+                0: {
+                    "qubit_index": 0,
+                    "measurement_window_index": 0,
+                },
+                1: {
+                    "qubit_index": 1,
+                    "measurement_window_index": 0,
+                },
+            },
+            "transpiler_info": {
+                "physical_virtual_mapping": {
+                    "0": 1,
+                    "1": 0,
+                },
+            },
+            "message": "SUCCESS!",
+        }
+        result = RiquSamplingResult(result_dict)
+
+        # Act
+        actual = result.message
+
+        # Assert
+        expected = "SUCCESS!"
         assert actual == expected
 
     def test_repr(self):
@@ -191,13 +278,20 @@ class TestRiquSamplingResult:
             "properties": {
                 0: {
                     "qubit_index": 0,
-                    "measurement_window_index": 0
+                    "measurement_window_index": 0,
                 },
                 1: {
                     "qubit_index": 1,
-                    "measurement_window_index": 0
-                }
-            }
+                    "measurement_window_index": 0,
+                },
+            },
+            "transpiler_info": {
+                "physical_virtual_mapping": {
+                    "0": 1,
+                    "1": 0,
+                },
+            },
+            "message": "SUCCESS!",
         }
         result = RiquSamplingResult(result_dict)
 

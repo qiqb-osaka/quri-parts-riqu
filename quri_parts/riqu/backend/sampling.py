@@ -141,13 +141,20 @@ class RiquSamplingResult(SamplingResult):
                 "properties": {
                     0: {
                         "qubit_index": 0,
-                        "measurement_window_index": 0
+                        "measurement_window_index": 0,
                     },
                     1: {
                         "qubit_index": 1,
-                        "measurement_window_index": 0
-                    }
-                }
+                        "measurement_window_index": 0,
+                    },
+                },
+                "transpiler_info": {
+                    "physical_virtual_mapping": {
+                        "0": 1,
+                        "1": 0,
+                    },
+                },
+                "message": "SUCCESS!",
             }
 
         In the above case, the bit string representation of 0, 1, and 3
@@ -170,8 +177,10 @@ class RiquSamplingResult(SamplingResult):
             raise ValueError("properties does not exist in result.")
 
         self._result = result
-        self._counts = result["counts"]
-        self._properties = result["properties"]
+        self._counts = result.get("counts")
+        self._properties = result.get("properties")
+        self._transpiler_info = result.get("transpiler_info")
+        self._message = result.get("message")
 
     @property
     def counts(self) -> SamplingCounts:
@@ -182,6 +191,16 @@ class RiquSamplingResult(SamplingResult):
     def properties(self) -> Dict:
         """Returns properties."""
         return self._properties
+
+    @property
+    def transpiler_info(self) -> Dict:
+        """Returns transpiler_info."""
+        return self._transpiler_info
+
+    @property
+    def message(self) -> str:
+        """Returns message."""
+        return self._message
 
     def __repr__(self) -> str:
         return str(self._result)
