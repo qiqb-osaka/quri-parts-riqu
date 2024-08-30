@@ -92,7 +92,7 @@ import json
 import os
 import time
 from collections import Counter
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 
 from quri_parts.backend import (
     BackendError,
