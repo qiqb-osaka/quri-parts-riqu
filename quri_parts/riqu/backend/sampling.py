@@ -92,7 +92,7 @@ import json
 import os
 import time
 from collections import Counter
-from typing import Any, Optional, Dict
+from typing import Any, Optional, Dict, Union
 
 from quri_parts.backend import (
     BackendError,
@@ -514,7 +514,7 @@ class RiquSamplingBackend(SamplingBackend):
 
     def sample(
         self,
-        circuit: NonParametricQuantumCircuit | list[NonParametricQuantumCircuit],
+        circuit: Union[NonParametricQuantumCircuit, list[NonParametricQuantumCircuit]],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
@@ -552,7 +552,7 @@ class RiquSamplingBackend(SamplingBackend):
 
     def sample_qasm(
         self,
-        qasm: str | list[str],
+        qasm: Union[str, list[str]],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
