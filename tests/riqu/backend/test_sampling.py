@@ -50,6 +50,15 @@ qubit[2] q;
 h q[0];
 cx q[0], q[1];"""
 
+qasm_data2 = """OPENQASM 3;
+include "stdgates.inc";
+qubit[3] q;
+
+h q[0];
+cx q[0], q[1];
+ry(0.1) q[2];"""
+
+qasm_array_json = json.dumps({"qasm": [qasm_data, qasm_data2, qasm_data]})
 
 def get_dummy_job(status: str = "success") -> Job:
     job = Job(
@@ -70,14 +79,17 @@ def get_dummy_job(status: str = "success") -> Job:
 
 
 def get_dummy_jobs_body(
+    qasm: Optional[str] = qasm_data,
     transpiler: Optional[str] = "normal",
     remark: Optional[str] = None,
+    job_type: Optional[str] = None,
 ) -> JobsBody:
     jobs_body = JobsBody(
-        qasm=qasm_data,
+        qasm=qasm,
         transpiler=transpiler,
         shots=10000,
         remark=remark,
+        job_type=job_type,
     )
     return jobs_body
 
@@ -647,7 +659,34 @@ class TestRiquSamplingBackend:
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body())
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(job_type='normal'))
+
+    def test_sample_circuit_array(self, mocker):
+        # Arrange
+        mock_obj = mocker.patch(
+            "quri_parts.riqu.rest.JobApi.post_job",
+            return_value=InlineResponse201("dummy_id"),
+        )
+        mocker.patch(
+            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job()
+        )
+        backend = RiquSamplingBackend(get_dummy_config())
+
+        circuit = QuantumCircuit(2)
+        circuit.add_H_gate(0)
+        circuit.add_CNOT_gate(0, 1)
+
+        circuit2 = QuantumCircuit(3)
+        circuit2.add_H_gate(0)
+        circuit2.add_CNOT_gate(0, 1)
+        circuit2.add_RY_gate(2, 0.1)
+
+        # Act
+        job = backend.sample([circuit, circuit2, circuit], n_shots=10000)
+
+        # Assert
+        assert job.id == "dummy_id"
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(qasm=qasm_array_json, job_type='multi_manual'))
 
     def test_sample__transpiler(self, mocker):
         # Arrange
@@ -669,7 +708,7 @@ class TestRiquSamplingBackend:
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal"))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal", job_type='normal'))
 
     def test_sample__remark(self, mocker):
         # Arrange
@@ -692,7 +731,7 @@ class TestRiquSamplingBackend:
         # Assert
         assert job.id == "dummy_id"
         mock_obj.assert_called_once_with(
-            body=get_dummy_jobs_body(remark="dummy_remark")
+            body=get_dummy_jobs_body(remark="dummy_remark", job_type='normal')
         )
 
     def test_sample_qasm(self, mocker):

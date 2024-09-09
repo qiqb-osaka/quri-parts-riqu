@@ -92,7 +92,7 @@ import json
 import os
 import time
 from collections import Counter
-from typing import Any, Optional
+from typing import Any, Optional, Dict, Union
 
 from quri_parts.backend import (
     BackendError,
@@ -119,7 +119,7 @@ class RiquSamplingResult(SamplingResult):
             The value of ``counts`` is the dict input for the counts.
             Where the keys represent a measured classical value
             and the value is an integer the number of shots with that result.
-            
+
             If the keys of ``counts`` is expressed as a bit string,
             then ``properties`` is a mapping from the index of bit string
             to the index of the quantum circuit.
@@ -165,7 +165,7 @@ class RiquSamplingResult(SamplingResult):
 
         If the same ``qubit_index`` is measured multiple times in one quantum circuit,
         ``measurement_window_index`` are set to 0, 1, 2, ...
-        
+
     """
 
     def __init__(self, result: dict[str, Any]) -> None:
@@ -181,6 +181,9 @@ class RiquSamplingResult(SamplingResult):
         self._properties = result.get("properties")
         self._transpiler_info = result.get("transpiler_info")
         self._message = result.get("message")
+        self._divided_result = (
+            result["divided_result"] if "divided_result" in result else None
+        )
 
     @property
     def counts(self) -> SamplingCounts:
@@ -201,6 +204,11 @@ class RiquSamplingResult(SamplingResult):
     def message(self) -> str:
         """Returns message."""
         return self._message
+
+    @property
+    def divided_result(self) -> Dict:
+        """Returns divided_result."""
+        return self._divided_result
 
     def __repr__(self) -> str:
         return str(self._result)
@@ -348,8 +356,19 @@ class RiquSamplingJob(SamplingJob):
             {int(bits, 2): count for bits, count in result["counts"].items()}
         )
         result["properties"] = {
-            int(qubit_index): value for qubit_index, value in result["properties"].items()
+            int(qubit_index): value
+            for qubit_index, value in result["properties"].items()
         }
+        if "divided_result" in result and result["divided_result"] is not None:
+            result["divided_result"]: SamplingCounts = [
+                dict(
+                    {
+                        int(bits, 2): count
+                        for bits, count in result["divided_result"][one_result].items()
+                    }
+                )
+                for one_result in result["divided_result"]
+            ]
 
         return RiquSamplingResult(result)
 
@@ -410,7 +429,9 @@ class RiquConfig:
         return self._proxy
 
     @staticmethod
-    def from_file(section: Optional[str] = "default", path: Optional[str] = "~/.riqu") -> "RiquConfig":
+    def from_file(
+        section: Optional[str] = "default", path: Optional[str] = "~/.riqu"
+    ) -> "RiquConfig":
         """Reads configuration information from a file.
 
         Args:
@@ -456,7 +477,7 @@ class RiquConfig:
         config = RiquConfig(
             url=parser[section]["url"],
             api_token=parser[section]["api_token"],
-            proxy=parser[section].get("proxy", None)
+            proxy=parser[section].get("proxy", None),
         )
         return config
 
@@ -493,7 +514,7 @@ class RiquSamplingBackend(SamplingBackend):
 
     def sample(
         self,
-        circuit: NonParametricQuantumCircuit,
+        circuit: Union[NonParametricQuantumCircuit, list[NonParametricQuantumCircuit]],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
@@ -517,16 +538,25 @@ class RiquSamplingBackend(SamplingBackend):
             ValueError: If ``n_shots`` is not a positive integer.
             BackendError: If job is wrong or if an authentication error occurred, etc.
         """
-        qasm = convert_to_qasm_str(circuit)
-        job = self.sample_qasm(qasm, n_shots, transpiler, remark)
+        if isinstance(circuit, list):
+            qasms_dict = {"qasm": [convert_to_qasm_str(c) for c in circuit]}
+            qasm_str = json.dumps(qasms_dict)
+            job_type = "multi_manual"
+        else:
+            qasm_str = convert_to_qasm_str(circuit)
+            job_type = "normal"
+
+        job = self.sample_qasm(qasm_str, n_shots, transpiler, remark, job_type)
+
         return job
 
     def sample_qasm(
         self,
-        qasm: str,
+        qasm: Union[str, list[str]],
         n_shots: int,
         transpiler: Optional[str] = "normal",
         remark: Optional[str] = None,
+        job_type: Optional[str] = None,
     ) -> SamplingJob:
         """Perform a sampling measurement of a OpenQASM 3.0 program.
 
@@ -551,7 +581,11 @@ class RiquSamplingBackend(SamplingBackend):
 
         try:
             body = JobsBody(
-                qasm=qasm, shots=n_shots, transpiler=transpiler, remark=remark
+                qasm=qasm,
+                shots=n_shots,
+                transpiler=transpiler,
+                remark=remark,
+                job_type=job_type,
             )
             response_post_job = self._job_api.post_job(body=body)
             response = self._job_api.get_job(response_post_job.job_id)
