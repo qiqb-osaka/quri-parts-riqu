@@ -580,6 +580,7 @@ class RiquSamplingBackend(SamplingBackend):
             raise ValueError("n_shots should be a positive integer.")
 
         try:
+            print(f"job_type={job_type}")
             body = JobsBody(
                 qasm=qasm,
                 shots=n_shots,
