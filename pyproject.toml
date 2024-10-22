@@ -38,6 +38,7 @@ quri-parts-core = "*"
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0.1,<9.0.0"
 pytest-mock = "^3.8.0"
+pytest-cov = "^5.0.0"
 
 [tool.poetry.group.lint.dependencies]
 black = ">=23.1,<25.0"
