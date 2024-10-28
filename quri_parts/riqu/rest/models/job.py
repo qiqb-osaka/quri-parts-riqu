@@ -33,6 +33,7 @@ class Job(object):
         'transpiled_qasm': 'str',
         'transpiler': 'str',
         'shots': 'int',
+        'job_type': 'str',
         'status': 'str',
         'result': 'str',
         'created': 'datetime',
@@ -48,6 +49,7 @@ class Job(object):
         'transpiled_qasm': 'transpiled_qasm',
         'transpiler': 'transpiler',
         'shots': 'shots',
+        'job_type': 'job_type',
         'status': 'status',
         'result': 'result',
         'created': 'created',
@@ -57,13 +59,14 @@ class Job(object):
         'remark': 'remark'
     }
 
-    def __init__(self, id=None, qasm=None, transpiled_qasm=None, transpiler=None, shots=None, status=None, result=None, created=None, in_queue=None, out_queue=None, ended=None, remark=None):  # noqa: E501
+    def __init__(self, id=None, qasm=None, transpiled_qasm=None, transpiler=None, shots=None, job_type=None, status=None, result=None, created=None, in_queue=None, out_queue=None, ended=None, remark=None):  # noqa: E501
         """Job - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._qasm = None
         self._transpiled_qasm = None
         self._transpiler = None
         self._shots = None
+        self._job_type = None
         self._status = None
         self._result = None
         self._created = None
@@ -82,6 +85,8 @@ class Job(object):
             self.transpiler = transpiler
         if shots is not None:
             self.shots = shots
+        if job_type is not None:
+            self.job_type = job_type
         if status is not None:
             self.status = status
         if result is not None:
@@ -201,6 +206,27 @@ class Job(object):
         """
 
         self._shots = shots
+
+    @property
+    def job_type(self):
+        """Gets the job_type of this Job.  # noqa: E501
+
+
+        :return: The job_type of this Job.  # noqa: E501
+        :rtype: str
+        """
+        return self._job_type
+
+    @job_type.setter
+    def job_type(self, job_type):
+        """Sets the job_type of this Job.
+
+
+        :param job_type: The job_type of this Job.  # noqa: E501
+        :type: str
+        """
+
+        self._job_type = job_type
 
     @property
     def status(self):

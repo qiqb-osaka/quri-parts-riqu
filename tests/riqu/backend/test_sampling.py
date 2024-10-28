@@ -67,6 +67,7 @@ def get_dummy_job(status: str = "success") -> Job:
         transpiled_qasm="dummy_transpiled_qasm",
         transpiler="normal",
         shots=10000,
+        job_type="normal",
         status=status,
         result='{"counts": {"00": 6000, "10": 4000}, "properties": { "0": {"qubit_index": 0, "measurement_window_index": 0}, "1": {"qubit_index": 1, "measurement_window_index": 0}}}',
         created="dummy_created",
@@ -337,6 +338,7 @@ class TestRiquSamplingJob:
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
         assert job.transpiler == "normal"
         assert job.shots == 10000
+        assert job.job_type == "normal"
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
         assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
@@ -807,6 +809,7 @@ class TestRiquSamplingBackend:
         assert job.transpiled_qasm == "dummy_transpiled_qasm"
         assert job.transpiler == "normal"
         assert job.shots == 10000
+        assert job.job_type == "normal"
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
         assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
