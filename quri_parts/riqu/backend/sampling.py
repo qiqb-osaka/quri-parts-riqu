@@ -262,6 +262,11 @@ class RiquSamplingJob(SamplingJob):
         return self._job.shots
 
     @property
+    def job_type(self) -> str:
+        """The type of Job."""
+        return self._job.job_type
+
+    @property
     def status(self) -> str:
         """The status of Job."""
         return self._job.status
