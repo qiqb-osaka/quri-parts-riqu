@@ -28,7 +28,7 @@ jobs:
         path: ./.venv
         key: venv-${{ hashFiles('poetry.lock') }}
     - name: Install the project dependencies
-        poetry install -vvv
+      run: poetry install -vvv
 
     - name: Run tests
       run: poetry run pytest --cov=quri_parts/riqu/backend --cov-report=xml

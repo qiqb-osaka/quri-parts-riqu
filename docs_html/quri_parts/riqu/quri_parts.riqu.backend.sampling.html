@@ -607,8 +607,13 @@ An example of a configuration file description is as below:</p>
 <p>A riqu backend for a sampling measurement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>config</strong> – A <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> for circuit execution.
-If this parameter is None, <code class="docutils literal notranslate"><span class="pre">default</span></code> section in <code class="docutils literal notranslate"><span class="pre">~/.riqu</span></code> file is read.</p>
+<dd class="field-odd"><p><strong>config</strong> – <p>A <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> for circuit execution.
+If this parameter is <code class="docutils literal notranslate"><span class="pre">None</span></code> and both environment variables <code class="docutils literal notranslate"><span class="pre">RIQU_URL</span></code> and <code class="docutils literal notranslate"><span class="pre">RIQU_API_TOKEN</span></code> exist,
+create a <a class="reference internal" href="#quri_parts.riqu.backend.sampling.RiquConfig" title="quri_parts.riqu.backend.sampling.RiquConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RiquConfig</span></code></a> using the values of the <code class="docutils literal notranslate"><span class="pre">RIQU_URL</span></code>, <code class="docutils literal notranslate"><span class="pre">RIQU_API_TOKEN</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">RIQU_PROXY</span></code> environment variables.</p>
+<p>If this parameter is <code class="docutils literal notranslate"><span class="pre">None</span></code> and the environment variables do not exist,
+the <code class="docutils literal notranslate"><span class="pre">default</span></code> section in the <code class="docutils literal notranslate"><span class="pre">~/.riqu</span></code> file is read.</p>
+</p>
 </dd>
 </dl>
 <dl class="py method">

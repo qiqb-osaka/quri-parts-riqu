@@ -632,15 +632,64 @@ class TestRiquConfig:
 
     def test_properties(self):
         # Act
-        actual = RiquConfig("dummpy_url", "dummy_api_token", "http://dummy:1234")
+        actual = RiquConfig("dummy_url", "dummy_api_token", "http://dummy:1234")
 
         # Assert
-        assert actual.url == "dummpy_url"
+        assert actual.url == "dummy_url"
         assert actual.api_token == "dummy_api_token"
         assert actual.proxy == "http://dummy:1234"
 
 
 class TestRiquSamplingBackend:
+    def test_init__use_env(self, mocker):
+        # Arrange
+        def mock_getenv(key, default=None):
+            if key == "RIQU_URL":
+                return "dummy_url"
+            elif key == "RIQU_API_TOKEN":
+                return "dummy_api_token"
+            elif key == "RIQU_PROXY":
+                return "http://dummy:1234"
+            return default
+        
+        mocker.patch("os.getenv", side_effect=mock_getenv)
+
+        # Act
+        backend = RiquSamplingBackend()
+
+        # Assert
+        api_client = backend._job_api.api_client
+        assert api_client.configuration.host == "dummy_url"
+        assert api_client.default_headers["q-api-token"] == "dummy_api_token"
+        assert api_client.configuration.proxy == "http://dummy:1234"
+
+    def test_init__not_use_env(self, mocker):
+        # Arrange
+        def mock_getenv(key, default=None):
+            if key == "RIQU_URL":
+                return "dummy_url"
+            # RIQU_API_TOKEN isn't set
+            # elif key == "RIQU_API_TOKEN":
+            #     return "dummy_api_token"
+            elif key == "RIQU_PROXY":
+                return "http://dummy:1234"
+            return default
+        
+        mocker.patch("os.getenv", side_effect=mock_getenv)
+        mocker.patch(
+            "quri_parts.riqu.backend.RiquConfig.from_file",
+            return_value=RiquConfig("fake_url", "fake_token", "http://fake_proxy")
+        )
+
+        # Act
+        backend = RiquSamplingBackend()
+
+        # Assert
+        api_client = backend._job_api.api_client
+        assert api_client.configuration.host == "fake_url"
+        assert api_client.default_headers["q-api-token"] == "fake_token"
+        assert api_client.configuration.proxy == "http://fake_proxy"
+
     def test_sample(self, mocker):
         # Arrange
         mock_obj = mocker.patch(
