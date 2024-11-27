@@ -492,7 +492,12 @@ class RiquSamplingBackend(SamplingBackend):
 
     Args:
         config: A :class:`RiquConfig` for circuit execution.
-            If this parameter is None, ``default`` section in ``~/.riqu`` file is read.
+            If this parameter is ``None`` and both environment variables ``RIQU_URL`` and ``RIQU_API_TOKEN`` exist,
+            create a :class:`RiquConfig` using the values of the ``RIQU_URL``, ``RIQU_API_TOKEN``,
+            and ``RIQU_PROXY`` environment variables.
+            
+            If this parameter is ``None`` and the environment variables do not exist,
+            the ``default`` section in the ``~/.riqu`` file is read.
     """
 
     def __init__(
@@ -501,9 +506,21 @@ class RiquSamplingBackend(SamplingBackend):
     ):
         super().__init__()
 
-        # if config is None, load them from file
+        # set config
         if config is None:
-            config = RiquConfig.from_file()
+            # if environment variables are set, use their values
+            url = os.getenv("RIQU_URL")
+            api_token = os.getenv("RIQU_API_TOKEN")
+            proxy = os.getenv("RIQU_PROXY")
+            if url is not None and api_token is not None:
+                config = RiquConfig(
+                    url=url,
+                    api_token=api_token,
+                    proxy=proxy,
+                )
+            # load config from file
+            else:
+                config = RiquConfig.from_file()
 
         # construct JobApi
         rest_config = Configuration()
