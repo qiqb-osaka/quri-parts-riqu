@@ -37,7 +37,7 @@ api_token=test_api_token
 [option]
 url=test_url
 api_token=test_api_token
-proxy=http://testproxy:port
+proxy=https://testproxy:port
 
 [wrong]
 url=test_url
@@ -614,7 +614,7 @@ class TestRiquConfig:
         # Assert
         assert actual.url == "test_url"
         assert actual.api_token == "test_api_token"
-        assert actual.proxy == "http://testproxy:port"
+        assert actual.proxy == "https://testproxy:port"
 
     def test_from_file__wrong(self, mocker):
         # Arrange
@@ -632,12 +632,12 @@ class TestRiquConfig:
 
     def test_properties(self):
         # Act
-        actual = RiquConfig("dummy_url", "dummy_api_token", "http://dummy:1234")
+        actual = RiquConfig("dummy_url", "dummy_api_token", "https://dummy:1234")
 
         # Assert
         assert actual.url == "dummy_url"
         assert actual.api_token == "dummy_api_token"
-        assert actual.proxy == "http://dummy:1234"
+        assert actual.proxy == "https://dummy:1234"
 
 
 class TestRiquSamplingBackend:
@@ -649,7 +649,7 @@ class TestRiquSamplingBackend:
             elif key == "RIQU_API_TOKEN":
                 return "dummy_api_token"
             elif key == "RIQU_PROXY":
-                return "http://dummy:1234"
+                return "https://dummy:1234"
             return default
         
         mocker.patch("os.getenv", side_effect=mock_getenv)
@@ -661,7 +661,7 @@ class TestRiquSamplingBackend:
         api_client = backend._job_api.api_client
         assert api_client.configuration.host == "dummy_url"
         assert api_client.default_headers["q-api-token"] == "dummy_api_token"
-        assert api_client.configuration.proxy == "http://dummy:1234"
+        assert api_client.configuration.proxy == "https://dummy:1234"
 
     def test_init__not_use_env(self, mocker):
         # Arrange
@@ -672,13 +672,13 @@ class TestRiquSamplingBackend:
             # elif key == "RIQU_API_TOKEN":
             #     return "dummy_api_token"
             elif key == "RIQU_PROXY":
-                return "http://dummy:1234"
+                return "https://dummy:1234"
             return default
         
         mocker.patch("os.getenv", side_effect=mock_getenv)
         mocker.patch(
             "quri_parts.riqu.backend.RiquConfig.from_file",
-            return_value=RiquConfig("fake_url", "fake_token", "http://fake_proxy")
+            return_value=RiquConfig("fake_url", "fake_token", "https://fake_proxy")
         )
 
         # Act
@@ -688,7 +688,7 @@ class TestRiquSamplingBackend:
         api_client = backend._job_api.api_client
         assert api_client.configuration.host == "fake_url"
         assert api_client.default_headers["q-api-token"] == "fake_token"
-        assert api_client.configuration.proxy == "http://fake_proxy"
+        assert api_client.configuration.proxy == "https://fake_proxy"
 
     def test_sample(self, mocker):
         # Arrange
