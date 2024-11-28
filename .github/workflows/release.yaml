@@ -5,7 +5,33 @@ on:
     types: [published]
 
 jobs:
+  update_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          VERSION=$(echo "version=${GITHUB_REF#refs/tags/v}")
+          echo "VERSION: $VERSION"
+          echo "::set-output name=version::$VERSION"
+
+      - name: Update version in pyproject.toml
+        run: |
+          sed -i "s/^version = \".*\"/version = \"${{ steps.extract_version.outputs.version }}\"/" pyproject.toml
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add pyproject.toml
+          git commit -m "Update version to ${{ steps.extract_version.outputs.version }}"
+          git push origin main
+
   package:
+    needs: [update_version]
     runs-on: ubuntu-latest
 
     steps:
