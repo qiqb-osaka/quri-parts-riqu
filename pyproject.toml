@@ -4,7 +4,7 @@ build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.poetry]
 name = "quri-parts-riqu"
-version = "0.4.2"
+version = "version=0.4.6"
 description = "QURI Parts riqu is a support library for using quantum computers provided by the cloud server with riqu (Rest Interface for QUantum computing) interface."
 license = "Apache-2.0"
 authors = ["QIQB, Osaka University"]
