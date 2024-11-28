@@ -28,7 +28,7 @@ jobs:
           git config user.email "actions@github.com"
           git add pyproject.toml
           git commit -m "Update version to ${{ steps.extract_version.outputs.version }}"
-          git push origin main
+          git push origin HEAD:refs/heads/main
 
   package:
     needs: [update_version]
