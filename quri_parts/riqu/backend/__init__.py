@@ -14,10 +14,7 @@ from .sampling import (
     RiquSamplingJob,
     RiquSamplingResult,
 )
-
-from .sse import (
-    RiquSseJob,
-)
+from .sse import RiquSseJob
 
 __all__ = [
     "RiquConfig",

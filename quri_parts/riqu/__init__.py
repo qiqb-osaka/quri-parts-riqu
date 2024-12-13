@@ -7,10 +7,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-QURI Parts riqu is a support library for using quantum computers provided by the cloud server
-with riqu (Rest Interface for QUantum computing) interface.
+"""QURI Parts riqu is a support library for using quantum computers provided by
+the cloud server with riqu (Rest Interface for QUantum computing) interface.
 
-This package is experimental and may undergo breaking changes without notice.
-Use it at your own risk.
+This package is experimental and may undergo breaking changes without
+notice. Use it at your own risk.
 """

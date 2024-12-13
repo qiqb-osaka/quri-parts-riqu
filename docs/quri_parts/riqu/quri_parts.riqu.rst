@@ -14,3 +14,11 @@ Subpackages
 
    quri_parts.riqu.backend
    quri_parts.riqu.rest
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   quri_parts.riqu.samplar

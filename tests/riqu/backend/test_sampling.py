@@ -17,14 +17,14 @@ import pytest
 from quri_parts.backend import BackendError
 from quri_parts.circuit import QuantumCircuit
 
-from quri_parts.riqu.rest import Job, JobApi, JobsBody
-from quri_parts.riqu.rest.models import InlineResponse201
 from quri_parts.riqu.backend.sampling import (
     RiquConfig,
     RiquSamplingBackend,
     RiquSamplingJob,
     RiquSamplingResult,
 )
+from quri_parts.riqu.rest import Job, JobApi, JobsBody
+from quri_parts.riqu.rest.models import InlineResponse201
 
 config_file_data = """[default]
 url=default_url
@@ -59,6 +59,7 @@ cx q[0], q[1];
 ry(0.1) q[2];"""
 
 qasm_array_json = json.dumps({"qasm": [qasm_data, qasm_data2, qasm_data]})
+
 
 def get_dummy_job(status: str = "success") -> Job:
     job = Job(
@@ -105,14 +106,8 @@ class TestRiquSamplingResult:
         # case: counts does not exist in result
         result_without_count = {
             "properties": {
-                0: {
-                    "qubit_index": 0,
-                    "measurement_window_index": 0
-                },
-                1: {
-                    "qubit_index": 1,
-                    "measurement_window_index": 0
-                }
+                0: {"qubit_index": 0, "measurement_window_index": 0},
+                1: {"qubit_index": 1, "measurement_window_index": 0},
             }
         }
         with pytest.raises(ValueError):
@@ -204,7 +199,7 @@ class TestRiquSamplingResult:
             1: {
                 "qubit_index": 1,
                 "measurement_window_index": 0,
-            }
+            },
         }
         assert actual == expected
 
@@ -341,7 +336,10 @@ class TestRiquSamplingJob:
         assert job.job_type == "normal"
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
-        assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
+        assert job.result().properties == {
+            0: {"qubit_index": 0, "measurement_window_index": 0},
+            1: {"qubit_index": 1, "measurement_window_index": 0},
+        }
         assert job.created == "dummy_created"
         assert job.in_queue == "dummy_in_queue"
         assert job.out_queue == "dummy_out_queue"
@@ -483,7 +481,10 @@ class TestRiquSamplingJob:
 
         # Assert
         assert actual.counts == {0: 6000, 2: 4000}
-        assert actual.properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
+        assert actual.properties == {
+            0: {"qubit_index": 0, "measurement_window_index": 0},
+            1: {"qubit_index": 1, "measurement_window_index": 0},
+        }
 
         # case2: status is "failure"
         # Arrange
@@ -530,7 +531,10 @@ class TestRiquSamplingJob:
 
         # Assert
         assert actual.counts == {0: 6000, 2: 4000}
-        assert actual.properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
+        assert actual.properties == {
+            0: {"qubit_index": 0, "measurement_window_index": 0},
+            1: {"qubit_index": 1, "measurement_window_index": 0},
+        }
         assert elapsed_time >= 3.0
 
     def test_result__timeout(self, mocker):
@@ -561,7 +565,8 @@ class TestRiquSamplingJob:
             return_value=None,
         )
         mocker.patch(
-            "quri_parts.riqu.rest.JobApi.get_job", return_value=get_dummy_job("cancelled")
+            "quri_parts.riqu.rest.JobApi.get_job",
+            return_value=get_dummy_job("cancelled"),
         )
         job_raw = get_dummy_job("processing")
         job = RiquSamplingJob(job=job_raw, job_api=JobApi())
@@ -651,7 +656,7 @@ class TestRiquSamplingBackend:
             elif key == "RIQU_PROXY":
                 return "https://dummy:1234"
             return default
-        
+
         mocker.patch("os.getenv", side_effect=mock_getenv)
 
         # Act
@@ -674,11 +679,11 @@ class TestRiquSamplingBackend:
             elif key == "RIQU_PROXY":
                 return "https://dummy:1234"
             return default
-        
+
         mocker.patch("os.getenv", side_effect=mock_getenv)
         mocker.patch(
             "quri_parts.riqu.backend.RiquConfig.from_file",
-            return_value=RiquConfig("fake_url", "fake_token", "https://fake_proxy")
+            return_value=RiquConfig("fake_url", "fake_token", "https://fake_proxy"),
         )
 
         # Act
@@ -710,7 +715,7 @@ class TestRiquSamplingBackend:
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(job_type='normal'))
+        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(job_type="normal"))
 
     def test_sample_circuit_array(self, mocker):
         # Arrange
@@ -737,7 +742,9 @@ class TestRiquSamplingBackend:
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(qasm=qasm_array_json, job_type='multi_manual'))
+        mock_obj.assert_called_once_with(
+            body=get_dummy_jobs_body(qasm=qasm_array_json, job_type="multi_manual")
+        )
 
     def test_sample__transpiler(self, mocker):
         # Arrange
@@ -759,7 +766,9 @@ class TestRiquSamplingBackend:
 
         # Assert
         assert job.id == "dummy_id"
-        mock_obj.assert_called_once_with(body=get_dummy_jobs_body(transpiler="normal", job_type='normal'))
+        mock_obj.assert_called_once_with(
+            body=get_dummy_jobs_body(transpiler="normal", job_type="normal")
+        )
 
     def test_sample__remark(self, mocker):
         # Arrange
@@ -782,7 +791,7 @@ class TestRiquSamplingBackend:
         # Assert
         assert job.id == "dummy_id"
         mock_obj.assert_called_once_with(
-            body=get_dummy_jobs_body(remark="dummy_remark", job_type='normal')
+            body=get_dummy_jobs_body(remark="dummy_remark", job_type="normal")
         )
 
     def test_sample_qasm(self, mocker):
@@ -861,7 +870,10 @@ class TestRiquSamplingBackend:
         assert job.job_type == "normal"
         assert job.status == "success"
         assert job.result().counts == {0: 6000, 2: 4000}
-        assert job.result().properties == {0: {"qubit_index": 0, "measurement_window_index": 0}, 1: {"qubit_index": 1, "measurement_window_index": 0}}
+        assert job.result().properties == {
+            0: {"qubit_index": 0, "measurement_window_index": 0},
+            1: {"qubit_index": 1, "measurement_window_index": 0},
+        }
         assert job.created == "dummy_created"
         assert job.in_queue == "dummy_in_queue"
         assert job.out_queue == "dummy_out_queue"
