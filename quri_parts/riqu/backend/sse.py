@@ -7,25 +7,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""A module to run sse job on riqu server.
-"""
-import os
+"""A module to run sse job on riqu server."""
 import base64
+import os
 from typing import Optional
 
-from quri_parts.backend import (
-    BackendError
-)
+from quri_parts.backend import BackendError
 
-from .sampling import RiquSamplingBackend, RiquConfig, RiquSamplingJob
 from ..rest import ApiClient, Configuration, JobApi
+from .sampling import RiquConfig, RiquSamplingBackend, RiquSamplingJob
+
 
 class RiquSseJob:
- 
-    def __init__(
-        self,
-        config: Optional[RiquConfig] = None
-    ):
+
+    def __init__(self, config: Optional[RiquConfig] = None):
         # if config is None, load them from file
         if config is None:
             self.config = RiquConfig.from_file()
@@ -45,18 +40,14 @@ class RiquSseJob:
         self._job_api: JobApi = JobApi(api_client=api_client)
         self.job = None
 
-    def run_sse(
-        self,
-        file_path: str,
-        remark: Optional[str] = ""
-    ) -> RiquSamplingJob:
+    def run_sse(self, file_path: str, remark: Optional[str] = "") -> RiquSamplingJob:
         # if file_path is not set, raise ValueError
         if file_path is None:
             raise ValueError("file_path is not set.")
 
         # if the file does not exist, raise ValueError
         if not os.path.exists(file_path):
-            raise ValueError(f'The file does not exist: {file_path}')
+            raise ValueError(f"The file does not exist: {file_path}")
 
         # get the base name and the extension of the file
         base_name, ext = os.path.splitext(file_path)
@@ -65,7 +56,7 @@ class RiquSseJob:
         if ext != ".py":
             raise ValueError(f"The file is not python file: {file_path}")
 
-        max_file_size = 10 * 1024 * 1024 # 10MB
+        max_file_size = 10 * 1024 * 1024  # 10MB
 
         # if the file size is larger than max_file_size, raise ValueError
         if os.path.getsize(file_path) >= max_file_size:
@@ -75,7 +66,9 @@ class RiquSseJob:
         jobType = "sse"
 
         try:
-            response = self._job_api.post_ssejob(up_file=file_path, remark=remark, job_type=jobType)
+            response = self._job_api.post_ssejob(
+                up_file=file_path, remark=remark, job_type=jobType
+            )
 
             job_id = response["job_id"]
 
@@ -86,12 +79,12 @@ class RiquSseJob:
             raise BackendError("To perform sse on riqu server is failed.") from e
 
         return self.job
-    
+
     def download_log(
-            self,
-            job_id: str = None,
-            download_path: str = None,
-        ) -> str:
+        self,
+        job_id: str = None,
+        download_path: str = None,
+    ) -> str:
 
         # if job_id is not set, raise ValueError
         if job_id is None:
@@ -105,9 +98,16 @@ class RiquSseJob:
         except Exception as e:
             raise BackendError("To perform sse on riqu server is failed.") from e
 
-        if response is None or not "file" in response or not "filename" in response \
-            or not response["file"] or not response["filename"]:
-                raise BackendError("To perform sse on riqu server is failed. The response does not contain valid file data.")
+        if (
+            response is None
+            or not "file" in response
+            or not "filename" in response
+            or not response["file"]
+            or not response["filename"]
+        ):
+            raise BackendError(
+                "To perform sse on riqu server is failed. The response does not contain valid file data."
+            )
 
         data = response["file"]
         filename = response["filename"]
@@ -116,7 +116,9 @@ class RiquSseJob:
             download_path = os.getcwd()
         else:
             if not os.path.exists(download_path):
-                raise ValueError(f"The destination path does not exist: {download_path}")
+                raise ValueError(
+                    f"The destination path does not exist: {download_path}"
+                )
 
         file_path = os.path.join(download_path, filename)
 
@@ -126,7 +128,7 @@ class RiquSseJob:
 
         # decode the base64 encoded data and write it to the file
         decoded_zip = base64.b64decode(data)
-        with open(file_path, 'bw') as t_file:
+        with open(file_path, "bw") as t_file:
             t_file.write(decoded_zip)
 
         return file_path

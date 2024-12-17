@@ -73,7 +73,7 @@ Examples:
         job = backend.sample_qasm(qasm, n_shots=1000)
         counts = job.result().counts
         print(counts)
-        
+
     To retrieve jobs already sent to riqu server, run the following code:
 
     .. highlight:: python
@@ -92,7 +92,7 @@ import json
 import os
 import time
 from collections import Counter
-from typing import Any, Optional, Dict, Union
+from typing import Any, Dict, Optional, Union
 
 from quri_parts.backend import (
     BackendError,
@@ -105,7 +105,6 @@ from quri_parts.circuit import NonParametricQuantumCircuit
 from quri_parts.openqasm.circuit import convert_to_qasm_str
 
 from ..rest import ApiClient, Configuration, Job, JobApi, JobsBody
-
 
 JOB_FINAL_STATUS = ["success", "failure", "cancelled"]
 
@@ -165,7 +164,6 @@ class RiquSamplingResult(SamplingResult):
 
         If the same ``qubit_index`` is measured multiple times in one quantum circuit,
         ``measurement_window_index`` are set to 0, 1, 2, ...
-
     """
 
     def __init__(self, result: dict[str, Any]) -> None:
@@ -473,7 +471,6 @@ class RiquConfig:
             .. code-block::
 
                 backend = RiquSamplingBackend(RiquConfig.from_file("sectionA"))
-
         """
         path = os.path.expandvars(path)
         path = os.path.expanduser(path)
@@ -495,7 +492,7 @@ class RiquSamplingBackend(SamplingBackend):
             If this parameter is ``None`` and both environment variables ``RIQU_URL`` and ``RIQU_API_TOKEN`` exist,
             create a :class:`RiquConfig` using the values of the ``RIQU_URL``, ``RIQU_API_TOKEN``,
             and ``RIQU_PROXY`` environment variables.
-            
+
             If this parameter is ``None`` and the environment variables do not exist,
             the ``default`` section in the ``~/.riqu`` file is read.
     """
