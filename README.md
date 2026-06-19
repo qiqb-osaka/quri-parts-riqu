@@ -1,3 +1,8 @@
+> # ⚠️ **Caution**
+>
+> This project has evolved into [QURI Parts OQTOPUS](https://github.com/oqtopus-team/quri-parts-oqtopus).  
+> Development of this repository has concluded, and it is now archived.
+
 # QURI Parts riqu
 
 riqu (**R**EST **I**nterface for **Qu**antum Computing) is an interface for using quantum computers
